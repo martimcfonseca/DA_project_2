@@ -32,6 +32,10 @@ public:
     void print() const;
 
     std::string formatLinhas() const;
+
+    bool operator==(const Web& other) const {
+        return id == other.id;
+    }
 };
 
 #endif

@@ -128,8 +128,8 @@ void Parser::parseConfig(const std::string& filename,int& numRegistos,std::strin
             continue;
         }
 
-        // Parse "registers: 3"
-        if (linha.find("registers:") == 0) {
+        // Parse "registers.txt: 3"
+        if (linha.find("registers.txt:") == 0) {
             size_t pos = linha.find(':');
             std::string valor = trim(linha.substr(pos + 1));
             numRegistos = std::stoi(valor);
