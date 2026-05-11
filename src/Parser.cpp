@@ -86,9 +86,6 @@ std::map<std::string, std::vector<LiveRange>> Parser::parseRanges(const std::str
             }
         }
 
-        // Ordenar as linhas
-        std::sort(lr.linhas.begin(), lr.linhas.end());
-
         // Adicionar ao mapa
         ranges[variavel].push_back(lr);
     }
