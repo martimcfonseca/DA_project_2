@@ -10,4 +10,5 @@ add_executable(regalloc
         src/Web.cpp
         src/GrafoBuilder.cpp
         src/Graph.h
+        src/main.cpp
 )
