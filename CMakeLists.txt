@@ -7,4 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(regalloc
         src/Parser.cpp
         src/LiveRange.cpp
+        src/Web.cpp
+        src/GrafoBuilder.cpp
+        src/Graph.h
 )
