@@ -6,15 +6,12 @@
 #include <stack>
 #include <unordered_map>
 
-std::vector<Vertex<Web>*> GraphColoring::colorGraphNormal(Graph<Web> *&graph, int num) {
-        // ── Reset state ────────────────────────────────────────────────────────
+std::vector<Vertex<Web> *> GraphColoring::colorGraphSpilling(Graph<Web> *&graph, int num){
         for (auto v : graph->getVertexSet()) {
             v->setColor(-1);
-            v->setVisited(false);   // visited == "removed from live graph"
+            v->setVisited(false);
         }
 
-        // ── Build live-degree map (counts only edges to live neighbours) ───────
-        // We cannot safely mutate indegree (used elsewhere), so keep our own map.
         std::unordered_map<Vertex<Web>*, int> liveDeg;
         for (auto v : graph->getVertexSet())
             liveDeg[v] = (int)v->getAdj().size();   // undirected: adj holds all edges
@@ -92,3 +89,68 @@ std::vector<Vertex<Web>*> GraphColoring::colorGraphNormal(Graph<Web> *&graph, in
 
         return spilled;             // caller inspects v->getColor() == -1 for spills
 }
+
+bool GraphColoring::colorGraphNormal(Graph<Web> *&graph, int num) {
+
+    for (auto v : graph->getVertexSet()) {
+            v->setColor(-1);
+            v->setVisited(false);   // visited == "removed from live graph"
+        }
+
+        std::unordered_map<Vertex<Web>*, int> liveDeg;
+        for (auto v : graph->getVertexSet())
+            liveDeg[v] = (int)v->getAdj().size();
+
+        std::stack<Vertex<Web>*> colorStack;
+
+        bool changed = true;
+        while (changed) {
+            changed = false;
+
+            for (auto v : graph->getVertexSet()) {
+                if (v->isVisited()) continue;
+                if (liveDeg[v] < num) {
+                    colorStack.push(v);
+                    v->setVisited(true);
+
+                    for (auto edge : v->getAdj()) {
+                        auto nb = edge->getDest();
+                        if (!nb->isVisited())
+                            liveDeg[nb]--;
+                    }
+
+                    changed = true;
+                }
+            }
+
+            // No progress but live nodes remain → graph is not N-colorable.
+            // Leave all colors at -1 so the caller loads everything from memory.
+            if (!changed) {
+                for (auto v : graph->getVertexSet())
+                    if (!v->isVisited())
+                        return false;
+            }
+        }
+
+        while (!colorStack.empty()) {
+            auto v = colorStack.top();
+            colorStack.pop();
+
+            std::set<int> usedColors;
+            for (auto edge : v->getAdj()) {
+                int c = edge->getDest()->getColor();
+                if (c >= 0)
+                    usedColors.insert(c);
+            }
+
+            // Lowest non-negative integer not used by any neighbour.
+            // Guaranteed to be < N because degree was < N when pushed.
+            int color = 0;
+            while (usedColors.count(color)>0) {
+                color++;
+            }
+            v->setColor(color);
+        }
+
+        return true;
+    }

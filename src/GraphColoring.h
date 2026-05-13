@@ -9,7 +9,8 @@
 
 class GraphColoring {
     public:
-    static std::vector<Vertex<Web>*> colorGraphNormal(Graph<Web>* &graph, int num);
+    static std::vector<Vertex<Web>*> colorGraphSpilling(Graph<Web>* &graph, int num);
+    static bool colorGraphNormal(Graph<Web>* &graph, int num);
 };
 
 #endif //REGISTERALLOCATION_GRAPHCOLORING_H
