@@ -129,7 +129,8 @@ void GrafoBuilder::printGrafo(Graph<Web>* grafo, const std::vector<Web*>& webs) 
         if (v) {
             int grau = v->getAdj().size();
             std::cout << "  web" << web->id << " (" << web->variavel << ")"
-                     << " - grau: " << grau << std::endl;
+                     << " - grau: " << grau
+                        << "-color: " << v->getColor() << std::endl;
         }
     }
 
