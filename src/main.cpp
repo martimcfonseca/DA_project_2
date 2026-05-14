@@ -1,60 +1,84 @@
-//
-// Created by Martim on 10/05/2026.
-//
 
-#include <iostream>
-#include <string>
-
+#include "Parser.h"
 #include "GrafoBuilder.h"
 #include "GraphColoring.h"
-#include "Parser.h"
-using namespace std;
+#include "output.h"
+#include <iostream>
 
-int main(int argc, char *argv[]) {
-    //cout << "path of the ranges file: ";
-    string ranges_file,config;
-    //cin >> ranges_file;
-    // TROCA OS PATHS QUANDO FORES TESTAR NO TEU, EU DEIXEI ASSIM PARA SER MAIS RÁPIDO TESTAR
-    ranges_file = "C:/Users/marti/Documents/DA/DA_project_2/basic/ranges/ranges6.txt";
-    //cout << "path of the config file: ";
-    //cin >> config;
-    config = "C:/Users/marti/Documents/DA/DA_project_2/basic/registers/registers1.txt";
+#include "Menu.h"
 
-    map<string, vector<LiveRange>> ranges = Parser::parseRanges(ranges_file);
-    int num,parameter;
-    string algorithm;
-    Parser::parseConfig(config, num, algorithm, parameter);
 
-    auto webs = GrafoBuilder::criarWebs(ranges);
-    auto graph = GrafoBuilder::construirGrafo(webs);
+int main(int argc, char* argv[]) {
 
-    cout << "option 0: normal\noption 1: spilling\noption: ";
-    int option;
-    cin >> option;
-    if (option == 0) {
-        bool spilled = !GraphColoring::colorGraphNormal(graph, 3);
-        if (!spilled) {
-            for (auto v : graph->getVertexSet())
-                if (v->getColor() >= 0)
-                    cout << v->getInfo().id << " --> r" << v->getColor() << "\n";
-        }
-        else {
-            for (auto v : graph->getVertexSet())
-                if (v->getColor() >= 0)
-                    cout << v->getInfo().id << " --> r" << "M" << "\n";
-        }
-    }
-    else if (option == 1) {
-        auto spills = GraphColoring::colorGraphSpilling(graph,3);
-        GrafoBuilder::printGrafo(graph,webs);
 
-        for (auto v : graph->getVertexSet())
-            if (v->getColor() >= 0)
-                cout << v->getInfo().id << " --> r" << v->getColor() << "\n";
+     if (argc == 5 && std::string(argv[1]) == "-b") {   //Modo batch "-b"
+         std::string rangesFile = argv[1];
+         std::string registersFile = argv[2];
+         std::string outputFile = argv[3];
+         try {
+             auto ranges = Parser::parseRanges(rangesFile);
+             int numRegistos = 0;
+             std::string algoritmo;
+             int parametro = 0;
+             Parser::parseConfig(registersFile, numRegistos, algoritmo, parametro);
+             std::vector<Web*> webs = GrafoBuilder::criarWebs(ranges); //criar as webs
+             Graph<Web>* grafo = GrafoBuilder::construirGrafo(webs); //criação do grafo atraves das ranges
 
-        if (spills.empty()) cout << "Nothing to Spill\n";
-        for (auto v : spills)
-            cout << v->getInfo().id << " → SPILL\n";
-    }
-    return 0;
-}
+             std::vector<Vertex<Web>*> spillados;
+             std::vector<SplitInfo> splits;
+             Graph<Web>* grafo_final = grafo;
+             bool sucesso = false;
+
+             if (algoritmo == "basic") {
+                 sucesso = GraphColoring::colorGraphNormal(grafo, numRegistos);
+
+
+
+             } else if (algoritmo == "spilling") {
+                 spillados = GraphColoring::colorGraphSpilling(grafo, numRegistos);
+
+
+             } else if (algoritmo == "splitting") {
+                 grafo_final = GraphColoring::colorGraphSplitting(
+                     grafo,
+                     numRegistos,
+                     parametro,
+                     splits,
+                     webs
+                 );
+
+                 sucesso = (grafo_final != nullptr);
+
+             } else {
+                 std::cerr << "Algoritmo desconhecido: " << algoritmo << std::endl;
+                 return 1;
+             }
+
+
+             Output::gerarOutput(outputFile,
+                webs,
+                grafo_final,
+                numRegistos,
+                spillados,
+                splits);
+
+         } catch (const std::exception& e) {
+             std::cerr << "Error: " << e.what() << std::endl;
+             return 1;
+         }
+
+         return 0;
+     }
+
+     if (argc == 1) { //Menu para o utlizador
+         bool rangesF = false;
+         bool registersF = false;
+         std::map<std::string, std::vector<LiveRange>> ranges;
+         int numRegistos = 0;
+         std::string algoritmo;
+         int parametro = 0;
+         runMenu(ranges,numRegistos,algoritmo,parametro, rangesF, registersF);
+         return 0;
+     }
+     return 0;
+ }
