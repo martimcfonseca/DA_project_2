@@ -281,19 +281,20 @@ std::vector<Web*> GraphColoring::divideWeb(Web* original, int& next_id) {
 
     return parts;
 }
+
 /**
  * @brief Rebuilds interference graph after splitting.
  *
  * Time Complexity:
  * - O(v² + e)
  */
-Graph<Web>* GraphColoring::rebuildGrafo(
+Graph<Web>* GraphColoring::rebuildGraph(
     Graph<Web>* original_graph,
     const std::vector<SplitInfo>& splits,
     const std::vector<Web*>& all_webs) {
 
     // Criar novo grafo
-    Graph<Web>* novo_grafo = new Graph<Web>();
+    Graph<Web>* new_graph = new Graph<Web>();
 
     // Conjunto de IDs dos webs originais que foram divididos
     std::set<int> ids_divididos;
@@ -304,29 +305,29 @@ Graph<Web>* GraphColoring::rebuildGrafo(
     // Adicionar todos os vértices (webs originais não divididos + partes)
     for (Web* web : all_webs) {
         // Verificar se este web foi dividido
-        bool foi_dividido = false;
+        bool was_divided = false;
         for (const auto& split : splits) {
             if (split.original->id == web->id) {
-                foi_dividido = true;
+                was_divided = true;
                 break;
             }
         }
 
-        if (!foi_dividido) {
+        if (!was_divided) {
             // Web não foi dividido, adicionar normalmente
-            novo_grafo->addVertex(*web);
+            new_graph->addVertex(*web);
         }
     }
 
     // Adicionar as partes dos webs divididos
     for (const auto& split : splits) {
         for (Web* parte : split.parts) {
-            novo_grafo->addVertex(*parte);
+            new_graph->addVertex(*parte);
         }
     }
 
     // Reconstruir arestas verificando interferências
-    std::vector<Vertex<Web>*> vertices = novo_grafo->getVertexSet();
+    std::vector<Vertex<Web>*> vertices = new_graph->getVertexSet();
 
     for (size_t i = 0; i < vertices.size(); i++) {
         for (size_t j = i + 1; j < vertices.size(); j++) {
@@ -345,19 +346,19 @@ Graph<Web>* GraphColoring::rebuildGrafo(
 
             // Verificar também nas partes
             for (const auto& split : splits) {
-                for (Web* parte : split.parts) {
-                    if (parte->id == web1.id) w1 = parte;
-                    if (parte->id == web2.id) w2 = parte;
+                for (Web* part : split.parts) {
+                    if (part->id == web1.id) w1 = part;
+                    if (part->id == web2.id) w2 = part;
                 }
             }
 
             if (w1 && w2 && w1->interfereWith(*w2)) {
-                novo_grafo->addBidirectionalEdge(*w1, *w2, 1.0);
+                new_graph->addBidirectionalEdge(*w1, *w2, 1.0);
             }
         }
     }
 
-    return novo_grafo;
+    return new_graph;
 }
 /**
  * @brief Graph coloring with splitting strategy.
@@ -373,7 +374,7 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
     int num,
     int max_splits,
     std::vector<SplitInfo>& splits_info,
-    std::vector<Web*>& webs_todos) {
+    std::vector<Web*>& all_webs) {
 
     std::cout << "\n=== WEB SPLITTING ===\n";
     std::cout << "Máximo de splits permitidos: " << max_splits << "\n";
@@ -404,14 +405,14 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
         std::cout << "\n";
 
         // 2. Dividir cada web
-        int proximo_id = webs_todos.size();  // próximo ID disponível
+        int proximo_id = all_webs.size();  // próximo ID disponível
 
         for (auto v : vertices_para_dividir) {
             Web web_original = v->getInfo();
 
             // Encontrar o web real na lista
             Web* web_ptr = nullptr;
-            for (Web* w : webs_todos) {
+            for (Web* w : all_webs) {
                 if (w->id == web_original.id) {
                     web_ptr = w;
                     break;
@@ -440,18 +441,18 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
                 splits_info.push_back(info);
 
                 // Adicionar novas partes à lista de webs
-                webs_todos.push_back(partes[0]);
-                webs_todos.push_back(partes[1]);
+                all_webs.push_back(partes[0]);
+                all_webs.push_back(partes[1]);
             }
         }
 
         std::cout << "\n";
 
         // 3. Reconstruir grafo
-        Graph<Web>* novo_grafo = rebuildGrafo(
+        Graph<Web>* novo_grafo = rebuildGraph(
             graph,
             splits_info,
-            webs_todos
+            all_webs
         );
 
         std::cout << "  Novo grafo construído:\n";

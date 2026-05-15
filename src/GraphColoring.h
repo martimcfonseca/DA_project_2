@@ -85,7 +85,7 @@ class GraphColoring {
      * @param todos_webs All webs after splitting.
      * @return Reconstructed graph.
      */
-    static Graph<Web>* rebuildGrafo(Graph<Web>* original_graph,const std::vector<SplitInfo>& splits,const std::vector<Web*>& all_webs);
+    static Graph<Web>* rebuildGraph(Graph<Web>* original_graph,const std::vector<SplitInfo>& splits,const std::vector<Web*>& all_webs);
 
 };
 
