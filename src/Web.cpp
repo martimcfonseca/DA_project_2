@@ -93,8 +93,11 @@ std::string Web::formatLinhas() const {
             }
         }
 
-        if (tem_plus) result += "+";
-        if (tem_minus) result += "-";
+        if (!(tem_plus && tem_minus)) {
+            if (tem_plus) result += "+";
+            if (tem_minus) result += "-";
+        }
+
 
         if (i < linhas_vec.size() - 1) {
             result += ",";

@@ -27,7 +27,6 @@ class Vertex {
 public:
     Vertex(T in);
     bool operator<(Vertex<T> & vertex) const; // // required by MutablePriorityQueue
-
     T getInfo() const;
     std::vector<Edge<T> *> getAdj() const;
     bool isVisited() const;
@@ -53,6 +52,9 @@ public:
     bool removeEdge(T in);
     void removeOutgoingEdges();
 
+    int getColor() const;
+    void setColor(int color);
+
 protected:
     T info;                // info node
     std::vector<Edge<T> *> adj;  // outgoing edges
@@ -64,6 +66,8 @@ protected:
     unsigned int indegree; // used by topsort
     double dist = 0;
     Edge<T> *path = nullptr;
+
+    int color=-1; //used by project_2
 
     std::vector<Edge<T> *> incoming; // incoming edges
 
@@ -236,6 +240,16 @@ int Vertex<T>::getNum() const {
 template <class T>
 void Vertex<T>::setNum(int value) {
     this->num = value;
+}
+
+template<class T>
+int Vertex<T>::getColor() const {
+    return this->color;
+}
+
+template<class T>
+void Vertex<T>::setColor(int color) {
+    this->color=color;
 }
 
 template <class T>
