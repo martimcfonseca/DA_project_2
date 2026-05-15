@@ -7,10 +7,25 @@
 #include "GraphColoring.h"
 #include <string>
 #include <vector>
-
+/**
+ * @class Output
+ * @brief Responsible for generating final reports and summaries.
+ *
+ * This class formats and outputs the results of the register allocation
+ * process, including graph coloring, spills, and splits.
+ */
 class Output {
 public:
 
+    /**
+     * @brief Generates a complete output file with allocation results.
+     * @param filename Output file name.
+     * @param webs_all All webs processed in the system.
+     * @param graph_final Final interference graph.
+     * @param num_register Number of available registers.
+     * @param spilled List of spilled vertices.
+     * @param splits Metadata about split operations.
+     */
     static void generateOutput(
         const std::string& filename,
         const std::vector<Web*>& webs_all,

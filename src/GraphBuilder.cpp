@@ -3,7 +3,25 @@
 #include <iostream>
 #include <iomanip>
 #include "Graph.h"
-
+/**
+ * @brief Checks whether two live ranges overlap.
+ *
+ * Two live ranges overlap if they share at least one common line.
+ *
+ * Time Complexity:
+ * - O(n * m)
+ *
+ * Where:
+ * - n is the number of lines in lr1
+ * - m is the cost of searching in lr2 (linear in its size)
+ *
+ * Space Complexity:
+ * - O(1)
+ *
+ * @param lr1 First live range.
+ * @param lr2 Second live range.
+ * @return true if they overlap, false otherwise.
+ */
 bool GraphBuilder::overlaps(const LiveRange& lr1, const LiveRange& lr2) {
     for (int line : lr1.lines) {
         if (lr2.contains(line)) {
@@ -12,7 +30,33 @@ bool GraphBuilder::overlaps(const LiveRange& lr1, const LiveRange& lr2) {
     }
     return false;
 }
-
+/**
+ * @brief Creates webs from a set of live ranges grouped by variable.
+ *
+ * Live ranges belonging to the same variable are merged into webs
+ * when they overlap. A greedy merging strategy is used.
+ *
+ * Time Complexity:
+ * - O(v * n² * m)
+ *
+ * Where:
+ * - v is the number of variables
+ * - n is the number of live ranges per variable
+ * - m is the average size of a live range
+ *
+ * Worst case:
+ * - Each live range is compared and possibly merged with all others.
+ *
+ * Space Complexity:
+ * - O(w + n)
+ *
+ * Where:
+ * - w is the number of created webs
+ * - n is the number of input live ranges
+ *
+ * @param ranges Map of variables to their live ranges.
+ * @return Vector of created Web pointers.
+ */
 std::vector<Web*> GraphBuilder::createWebs(std::map<std::string, std::vector<LiveRange>>& ranges) {
 
     std::vector<Web*> webs;
@@ -87,7 +131,28 @@ std::vector<Web*> GraphBuilder::createWebs(std::map<std::string, std::vector<Liv
 
     return webs;
 }
-
+/**
+ * @brief Builds an interference graph from a set of webs.
+ *
+ * Each web becomes a vertex. An edge is added between two webs
+ * if they interfere.
+ *
+ * Time Complexity:
+ * - O(w² * i)
+ *
+ * Where:
+ * - w is the number of webs
+ * - i is the cost of interference checking
+ *
+ * Space Complexity:
+ * - O(w + e)
+ *
+ * Where:
+ * - e is the number of edges
+ *
+ * @param webs Vector of Web pointers.
+ * @return Pointer to constructed graph.
+ */
 Graph<Web>* GraphBuilder::buildGraph(std::vector<Web*>& webs) {
     Graph<Web>* graph = new Graph<Web>();
 

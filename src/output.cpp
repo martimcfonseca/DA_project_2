@@ -5,6 +5,35 @@
 #include <map>
 #include <set>
 
+
+/**
+ * @brief Generates a full output file describing register allocation results.
+ *
+ * The output includes:
+ * - Web splitting information
+ * - Final webs and their live ranges
+ * - Register assignment
+ * - Spilled webs (if any)
+ *
+ * Time Complexity:
+ * - O(v + e + s * p)
+ *
+ * Where:
+ * - v = number of vertices (webs in graph)
+ * - e = number of edges (interference relations)
+ * - s = number of splits
+ * - p = cost of iterating split parts
+ *
+ * Space Complexity:
+ * - O(v + s)
+ *
+ * @param filename Output file path.
+ * @param webs_all All webs in the system.
+ * @param graph_final Final interference graph.
+ * @param num_register Number of available registers.
+ * @param spilled List of spilled vertices.
+ * @param splits Split metadata.
+ */
 void Output::generateOutput(
     const std::string& filename,
     const std::vector<Web*>& webs_all,
