@@ -29,7 +29,7 @@ class GraphColoring {
 
     static std::vector<Web*> divideWeb(Web* original, int& next_id);
 
-    static Graph<Web>* rebuildGrafo(Graph<Web>* original_graph,const std::vector<SplitInfo>& splits,const std::vector<Web*>& all_webs);
+    static Graph<Web>* rebuildGraph(Graph<Web>* original_graph,const std::vector<SplitInfo>& splits,const std::vector<Web*>& all_webs);
 
 };
 
