@@ -1,7 +1,10 @@
 //
 // Created by marti on 11/05/2026.
 //
-
+/**
+ * @file GraphColoring.cpp
+ * @brief Graph coloring algorithms for register allocation.
+ */
 #include "GraphColoring.h"
 #include <stack>
 #include <unordered_map>
@@ -9,6 +12,28 @@
 #include <algorithm>
 #include <set>
 
+
+/**
+ * @brief Performs graph coloring using a spilling-based strategy.
+ *
+ * This algorithm removes low-degree nodes first and assigns colors
+ * in reverse order. When no node with degree < K exists, a spill
+ * (node removal to memory) is performed.
+ *
+ * Time Complexity:
+ * - O(v² + e)
+ *
+ * Where:
+ * - v = number of vertices
+ * - e = number of edges
+ *
+ * Space Complexity:
+ * - O(v)
+ *
+ * @param graph Interference graph.
+ * @param num Number of available registers.
+ * @return List of spilled vertices.
+ */
 std::vector<Vertex<Web> *> GraphColoring::colorGraphSpilling(Graph<Web> *&graph, int num){
         for (auto v : graph->getVertexSet()) {
             v->setColor(-1);
@@ -93,6 +118,19 @@ std::vector<Vertex<Web> *> GraphColoring::colorGraphSpilling(Graph<Web> *&graph,
         return spilled;             // caller inspects v->getColor() == -1 for spills
 }
 
+
+/**
+ * @brief Standard greedy graph coloring algorithm.
+ *
+ * If a valid coloring within K colors is not possible,
+ * the function returns false.
+ *
+ * Time Complexity:
+ * - O(v² + e)
+ *
+ * Space Complexity:
+ * - O(v)
+ */
 bool GraphColoring::colorGraphNormal(Graph<Web> *&graph, int num) {
 
     for (auto v : graph->getVertexSet()) {
@@ -158,6 +196,13 @@ bool GraphColoring::colorGraphNormal(Graph<Web> *&graph, int num) {
         return true;
     }
 
+
+/**
+ * @brief Selects vertices with highest degree for splitting.
+ *
+ * Time Complexity:
+ * - O(v log v)
+ */
 std::vector<Vertex<Web>*> GraphColoring::escolherWebsParaSplit(
     Graph<Web>* graph,
     int k) {
@@ -180,7 +225,15 @@ std::vector<Vertex<Web>*> GraphColoring::escolherWebsParaSplit(
     return escolhidos;
 }
 
-
+/**
+ * @brief Splits a web into two smaller webs.
+ *
+ * Time Complexity:
+ * - O(n log n)
+ *
+ * Space Complexity:
+ * - O(n)
+ */
 std::vector<Web*> GraphColoring::dividirWeb(Web* original, int& proximo_id) {
     std::vector<Web*> partes;
 
@@ -234,7 +287,12 @@ std::vector<Web*> GraphColoring::dividirWeb(Web* original, int& proximo_id) {
 
     return partes;
 }
-
+/**
+ * @brief Rebuilds interference graph after splitting.
+ *
+ * Time Complexity:
+ * - O(v² + e)
+ */
 Graph<Web>* GraphColoring::reconstruirGrafo(
     Graph<Web>* grafo_original,
     const std::vector<SplitInfo>& splits,
@@ -307,7 +365,15 @@ Graph<Web>* GraphColoring::reconstruirGrafo(
 
     return novo_grafo;
 }
-
+/**
+ * @brief Graph coloring with splitting strategy.
+ *
+ * Tries progressively splitting high-degree webs until
+ * coloring becomes possible.
+ *
+ * Time Complexity:
+ * - Exponential in worst case due to splitting attempts
+ */
 Graph<Web>* GraphColoring::colorGraphSplitting(
     Graph<Web>*& graph,
     int num,

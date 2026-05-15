@@ -27,6 +27,30 @@ std::vector<std::string> Parser::split(const std::string& str, char delim) {
     return tokens;
 }
 
+
+/**
+ * @brief Parses a file containing variable live ranges.
+ *
+ * The expected format for each line is:
+ * variable: 1+,2,3,4-
+ *
+ * Empty lines and comments starting with '#' are ignored.
+ * Each parsed live range is stored in a map indexed by
+ * the variable name for fast acess.
+ *
+ * Time Complexity:
+ * - O(n * m)
+ *
+ * Where:
+ * - n is the number of lines in the file.
+ * - m is the average number of tokens per line.
+ *
+ * Space Complexity:
+ * - O(n * m)
+ *
+ * @param filename Name of the file to parse.
+ * @return Map containing parsed live ranges grouped by variable.
+ */
 std::map<std::string, std::vector<LiveRange>> Parser::parseRanges(const std::string& filename) {
 
     std::map<std::string, std::vector<LiveRange>> ranges;
@@ -105,6 +129,31 @@ std::map<std::string, std::vector<LiveRange>> Parser::parseRanges(const std::str
 
     return ranges;
 }
+
+
+/**
+ * @brief Parses the registers file.
+ *
+ * The method extracts:
+ * - Number of registers
+ * - Algorithm name
+ * - Optional algorithm parameter
+ *
+ * Time Complexity:
+ * - O(n)
+ *
+ * Where:
+ * - n is the number of lines in the configuration file.
+ *
+ * Space Complexity:
+ * - O(1)
+ *
+ * @param filename Name of the configuration file.
+ * @param numRegistos Number of available registers.
+ * @param algoritmo Selected algorithm name.
+ * @param parametro Additional algorithm parameter.
+ */
+
 
 void Parser::parseConfig(const std::string& filename,int& numRegistos,std::string& algoritmo,int& parametro) {
 

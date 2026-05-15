@@ -8,6 +8,14 @@
 #include "Web.h"
 
 
+/**
+ * @struct SplitInfo
+ * @brief Stores information about a web splitting operation.
+ *
+ * Used in graph coloring with splitting strategies,
+ * where a single web can be divided into multiple smaller webs
+ * to reduce register pressure.
+ */
 struct SplitInfo {
     Web* original;              // Web original
     std::vector<Web*> partes;   // Partes resultantes do split
@@ -17,17 +25,64 @@ struct SplitInfo {
 
 class GraphColoring {
     public:
+
+    /**
+     * @brief Colors a graph using spilling strategy.
+     * @param graph Interference graph.
+     * @param num Number of available registers.
+     * @return List of spilled vertices.
+     */
     static std::vector<Vertex<Web>*> colorGraphSpilling(Graph<Web>* &graph, int num);
+
+    /**
+     * @brief Colors a graph using a standard greedy coloring algorithm.
+     * @param graph Interference graph.
+     * @param num Number of available registers.
+     * @return true if coloring succeeded without conflicts.
+     */
     static bool colorGraphNormal(Graph<Web>* &graph, int num);
+
+    /**
+     * @brief Colors a graph using splitting strategy.
+     * @param graph Interference graph.
+     * @param num Number of registers.
+     * @param max_splits Maximum number of allowed splits.
+     * @param splits_info Stores metadata about performed splits.
+     * @param webs_todo List of all webs involved in processing.
+     * @return New graph after splitting operations.
+     */
     static Graph<Web>* colorGraphSplitting(Graph<Web>*& graph,int num,int max_splits,std::vector<SplitInfo>& splits_info,std::vector<Web*>& webs_todo);
 
     private:
+
+    /**
+    * @brief Selects candidate webs to be split.
+    * @param graph Interference graph.
+    * @param k Number of webs to select.
+    * @return List of selected vertices.
+    */
     static std::vector<Vertex<Web>*> escolherWebsParaSplit(
         Graph<Web>* graph,
         int k
     );
 
+    /**
+     * @brief Splits a web into smaller parts.
+     *
+     * @param original Web to split.
+     * @param proximo_id Next available web identifier.
+     * @return Vector of resulting webs.
+     */
     static std::vector<Web*> dividirWeb(Web* original, int& proximo_id);
+
+
+    /**
+     * @brief Rebuilds the graph after splitting operations.
+     * @param grafo_original Original graph.
+     * @param splits Split metadata.
+     * @param todos_webs All webs after splitting.
+     * @return Reconstructed graph.
+     */
 
     static Graph<Web>* reconstruirGrafo(Graph<Web>* grafo_original,const std::vector<SplitInfo>& splits,const std::vector<Web*>& todos_webs);
 

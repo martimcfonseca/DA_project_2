@@ -1,3 +1,12 @@
+/**
+* @file Menu.cpp
+ * @brief User interface for register allocation tool.
+ *
+ * Provides an interactive menu to:
+ * - Load live ranges
+ * - Load configuration (registers + algorithm)
+ * - Execute register allocation
+ */
 
 
 #include <iostream>
@@ -24,7 +33,35 @@ void printMenu() {
 }
 
 
-
+/**
+ * @brief Runs the interactive menu loop.
+ *
+ * This function controls the full workflow:
+ * - parsing input files
+ * - building interference graph
+ * - executing selected coloring algorithm
+ * - generating output
+ *
+ * Time Complexity:
+ * - Depends on selected algorithm:
+ *   - Basic coloring: O(v + e)
+ *   - Spilling: O(v² + e)
+ *   - Splitting: potentially exponential (worst case)
+ *
+ * Where:
+ * - v = number of webs
+ * - e = number of interference edges
+ *
+ * Space Complexity:
+ * - O(v + e)
+ *
+ * @param ranges Live ranges grouped by variable.
+ * @param numRegisters Number of available registers.
+ * @param algoritmo Selected algorithm ("basic", "spilling", "splitting").
+ * @param parametros Extra parameter (used for splitting depth).
+ * @param rangesF Flag indicating if ranges file was loaded.
+ * @param registersF Flag indicating if config file was loaded.
+ */
 void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegisters,std::string algoritmo,int parametros,bool rangesF, bool registersF ) {
     int choice;
     do {
