@@ -2,7 +2,28 @@
 #include "Web.h"
 #include <iostream>
 #include <algorithm>
-
+/**
+ * @brief Adds a live range to the web.
+ *
+ * The live range pointer is stored internally and all its
+ * live lines are inserted into the web line set.
+ *
+ * If the web variable name has not yet been defined,
+ * it is initialized using the variable associated with
+ * the first inserted live range.
+ *
+ * Time Complexity:
+ * - O(n log m)
+ *
+ * Where:
+ * - n is the number of lines in the live range.
+ * - m is the number of lines already stored in the set.
+ *
+ * Space Complexity:
+ * - O(n)
+ *
+ * @param lr Pointer to the live range to add.
+ */
 void Web::addLiveRange(LiveRange* lr) {
     liveRanges.push_back(lr);
 
@@ -16,11 +37,56 @@ void Web::addLiveRange(LiveRange* lr) {
         variable = lr->variable;
     }
 }
-
+/**
+ * @brief Checks whether a given line belongs to the web.
+ *
+ * Uses set lookup for efficient searching.
+ *
+ * Time Complexity:
+ * - O(log n)
+ *
+ * Where:
+ * - n is the number of stored lines.
+ *
+ * Space Complexity:
+ * - O(1)
+ *
+ * @param linha Line number to search for.
+ * @return true if the line exists in the web.
+ */
 bool Web::contains(int line) const {
     return lines.find(line) != lines.end();
 }
-
+/**
+ * @brief Determines whether this web interferes with another web.
+ *
+ * Two webs interfere if they share at least one active line,
+ * except for the special case where one web ends exactly
+ * when the other begins.
+ *
+ * The method computes the intersection between both line sets
+ * and analyzes overlapping live ranges.
+ *
+ * Time Complexity:
+ * - O(n + m + k * (a + b))
+ *
+ * Where:
+ * - n is the number of lines in this web.
+ * - m is the number of lines in the other web.
+ * - k is the size of the intersection.
+ * - a and b are the number of live ranges in each web.
+ *
+ * In practice, the dominant operation is the set intersection.
+ *
+ * Space Complexity:
+ * - O(k)
+ *
+ * Where:
+ * - k is the size of the intersection.
+ *
+ * @param other Web to compare against.
+ * @return true if the webs interfere, false otherwise.
+ */
 bool Web::interfereWith(const Web& other) const {
 
 
