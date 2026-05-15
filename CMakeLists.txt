@@ -8,9 +8,11 @@ add_executable(regalloc
         src/Parser.cpp
         src/LiveRange.cpp
         src/Web.cpp
-        src/GrafoBuilder.cpp
+        src/GraphBuilder.cpp
         src/Graph.h
         src/main.cpp
         src/GraphColoring.cpp
         src/GraphColoring.h
+        src/Menu.cpp
+        src/output.cpp
 )

@@ -4,7 +4,7 @@
 #include <limits>
 #include "Menu.h"
 #include "GraphColoring.h"
-#include "GrafoBuilder.h"
+#include "GraphBuilder.h"
 #include "output.h"
 #include "Graph.h"
 
@@ -25,7 +25,7 @@ void printMenu() {
 
 
 
-void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegisters,std::string algoritmo,int parametros,bool rangesF, bool registersF ) {
+void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegisters,std::string algorithm,int parameters,bool rangesF, bool registersF ) {
     int choice;
     do {
         printMenu();
@@ -51,7 +51,7 @@ void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegist
                 cout << "Caminho do ficheiro: ";
                 cin >> filename;
                 try {
-                    Parser::parseConfig(filename, numRegisters, algoritmo, parametros);
+                    Parser::parseConfig(filename, numRegisters, algorithm, parameters);
                     registersF = true;
                     cout << "Ficheiro carregado com sucesso!" << endl;
                 } catch (const std::exception& e) {
@@ -71,42 +71,42 @@ void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegist
                     }
                 }
                 else {
-                    std::vector<Web*> webs = GrafoBuilder::criarWebs(ranges);
-                    Graph<Web>* grafo = GrafoBuilder::construirGrafo(webs);
-                    std::vector<Vertex<Web>*> spillados;
+                    std::vector<Web*> webs = GraphBuilder::createWebs(ranges);
+                    Graph<Web>* graph = GraphBuilder::buildGraph(webs);
+                    std::vector<Vertex<Web>*> spilled;
                     std::vector<SplitInfo> splits;
-                    Graph<Web>* grafo_final = grafo;
-                    bool sucesso = false;
+                    Graph<Web>* graph_final = graph;
+                    bool sucess = false;
 
-                    if (algoritmo == "basic") {
-                        sucesso = GraphColoring::colorGraphNormal(grafo, numRegisters);
-
-
-
-                    } else if (algoritmo == "spilling") {
-                        spillados = GraphColoring::colorGraphSpilling(grafo, numRegisters);
+                    if (algorithm == "basic") {
+                        sucess = GraphColoring::colorGraphNormal(graph, numRegisters);
 
 
-                    } else if (algoritmo == "splitting") {
-                        grafo_final = GraphColoring::colorGraphSplitting(
-                            grafo,
+
+                    } else if (algorithm == "spilling") {
+                        spilled = GraphColoring::colorGraphSpilling(graph, numRegisters);
+
+
+                    } else if (algorithm == "splitting") {
+                        graph_final = GraphColoring::colorGraphSplitting(
+                            graph,
                             numRegisters,
-                            parametros,
+                            parameters,
                             splits,
                             webs
                         );
 
-                        sucesso = (grafo_final != nullptr);
+                        sucess = (graph_final != nullptr);
 
                     } else {
-                        std::cerr << "Algoritmo desconhecido: " << algoritmo << std::endl;
+                        std::cerr << "Algoritmo desconhecido: " << algorithm << std::endl;
                     }
 
-                    Output::gerarOutput("output.txt",
+                    Output::generateOutput("output.txt",
                         webs,
-                        grafo_final,
+                        graph_final,
                         numRegisters,
-                        spillados,
+                        spilled,
                         splits);
 
                 }

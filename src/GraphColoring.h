@@ -10,8 +10,8 @@
 
 struct SplitInfo {
     Web* original;              // Web original
-    std::vector<Web*> partes;   // Partes resultantes do split
-    int ponto_divisao;          // Linha onde foi dividido
+    std::vector<Web*> parts;   // Partes resultantes do split
+    int point_division;          // Linha onde foi dividido
 };
 
 
@@ -19,17 +19,17 @@ class GraphColoring {
     public:
     static std::vector<Vertex<Web>*> colorGraphSpilling(Graph<Web>* &graph, int num);
     static bool colorGraphNormal(Graph<Web>* &graph, int num);
-    static Graph<Web>* colorGraphSplitting(Graph<Web>*& graph,int num,int max_splits,std::vector<SplitInfo>& splits_info,std::vector<Web*>& webs_todo);
+    static Graph<Web>* colorGraphSplitting(Graph<Web>*& graph,int num,int max_splits,std::vector<SplitInfo>& splits_info,std::vector<Web*>& all_webs);
 
     private:
-    static std::vector<Vertex<Web>*> escolherWebsParaSplit(
+    static std::vector<Vertex<Web>*> chooseWebsForSplit(
         Graph<Web>* graph,
         int k
     );
 
-    static std::vector<Web*> dividirWeb(Web* original, int& proximo_id);
+    static std::vector<Web*> divideWeb(Web* original, int& next_id);
 
-    static Graph<Web>* reconstruirGrafo(Graph<Web>* grafo_original,const std::vector<SplitInfo>& splits,const std::vector<Web*>& todos_webs);
+    static Graph<Web>* rebuildGrafo(Graph<Web>* original_graph,const std::vector<SplitInfo>& splits,const std::vector<Web*>& all_webs);
 
 };
 

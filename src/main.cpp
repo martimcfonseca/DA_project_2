@@ -1,6 +1,6 @@
 
 #include "Parser.h"
-#include "GrafoBuilder.h"
+#include "GraphBuilder.h"
 #include "GraphColoring.h"
 #include "output.h"
 #include <iostream>
@@ -21,8 +21,8 @@ int main(int argc, char* argv[]) {
              std::string algoritmo;
              int parametro = 0;
              Parser::parseConfig(registersFile, numRegistos, algoritmo, parametro);
-             std::vector<Web*> webs = GrafoBuilder::criarWebs(ranges); //criar as webs
-             Graph<Web>* grafo = GrafoBuilder::construirGrafo(webs); //criação do grafo atraves das ranges
+             std::vector<Web*> webs = GraphBuilder::createWebs(ranges); //criar as webs
+             Graph<Web>* grafo = GraphBuilder::buildGraph(webs); //criação do grafo atraves das ranges
 
              std::vector<Vertex<Web>*> spillados;
              std::vector<SplitInfo> splits;
@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
              }
 
 
-             Output::gerarOutput(outputFile,
+             Output::generateOutput(outputFile,
                 webs,
                 grafo_final,
                 numRegistos,
