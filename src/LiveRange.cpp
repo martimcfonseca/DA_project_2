@@ -3,26 +3,26 @@
 #include <iostream>
 #include <algorithm>
 
-void LiveRange::addLinha(int linha, char marcador) {
-    linhas.push_back(linha);
+void LiveRange::addLine(int line, char marker) {
+    lines.push_back(line);
 
-    if (marcador == '+') {
-        inicio = linha;
-        tem_def = true;
-    } else if (marcador == '-') {
-        fim = linha;
-        tem_uso = true;
+    if (marker == '+') {
+        start = line;
+        has_def = true;
+    } else if (marker == '-') {
+        end = line;
+        has_use = true;
     }
 }
 
-bool LiveRange::contem(int linha) const {
-    return std::find(linhas.begin(), linhas.end(), linha) != linhas.end();
+bool LiveRange::contains(int line) const {
+    return std::find(lines.begin(), lines.end(), line) != lines.end();
 }
 
-bool LiveRange::sobrepoe(const LiveRange& other) const {
+bool LiveRange::overlaps(const LiveRange& other) const {
     // Verifica se há interseção entre os conjuntos de linhas para formar as web depois
-    for (int linha : linhas) {
-        if (other.contem(linha)) {
+    for (int line : lines) {
+        if (other.contains(line)) {
             return true;
         }
     }
@@ -30,12 +30,12 @@ bool LiveRange::sobrepoe(const LiveRange& other) const {
 }
 
 void LiveRange::print() const {
-    std::cout << variavel << ": ";
-    for (std::size_t i = 0; i < linhas.size(); i++) {
-        std::cout << linhas[i];
-        if (i == 0 && tem_def) std::cout << "+";
-        if (i == linhas.size()-1 && tem_uso) std::cout << "-";
-        if (i < linhas.size()-1) std::cout << ",";
+    std::cout << variable << ": ";
+    for (std::size_t i = 0; i < lines.size(); i++) {
+        std::cout << lines[i];
+        if (i == 0 && has_def) std::cout << "+";
+        if (i == lines.size()-1 && has_use) std::cout << "-";
+        if (i < lines.size()-1) std::cout << ",";
     }
     std::cout << std::endl;
 }

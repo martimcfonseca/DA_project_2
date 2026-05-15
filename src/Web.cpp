@@ -7,54 +7,54 @@ void Web::addLiveRange(LiveRange* lr) {
     liveRanges.push_back(lr);
 
     // Adicionar todas as linhas ao conjunto
-    for (int linha : lr->linhas) {
-        linhas.insert(linha);
+    for (int linha : lr->lines) {
+        lines.insert(linha);
     }
 
     // Usar a variável do primeiro live range
-    if (variavel.empty()) {
-        variavel = lr->variavel;
+    if (variable.empty()) {
+        variable = lr->variable;
     }
 }
 
-bool Web::contem(int linha) const {
-    return linhas.find(linha) != linhas.end();
+bool Web::contains(int line) const {
+    return lines.find(line) != lines.end();
 }
 
 bool Web::interfereWith(const Web& other) const {
 
 
-    std::vector<int> interseccao;
-    std::set_intersection(linhas.begin(), linhas.end(),other.linhas.begin(), other.linhas.end(),std::back_inserter(interseccao));
+    std::vector<int> intersection;
+    std::set_intersection(lines.begin(), lines.end(),other.lines.begin(), other.lines.end(),std::back_inserter(intersection));
 
-    if (interseccao.empty()) {
+    if (intersection.empty()) {
         return false;
     }
 
     // Verificar se é o caso especial:
     // um web TERMINA exatamente onde outro COMEÇA
-    for (int linha : interseccao) {
-        bool este_termina = false;
-        bool outro_comeca = false;
+    for (int linha : intersection) {
+        bool this_ends = false;
+        bool another_starts = false;
 
         // Verificar se este web TERMINA nesta linha
         for (LiveRange* lr : liveRanges) {
-            if (lr->fim == linha && lr->tem_uso) {
-                este_termina = true;
+            if (lr->end == linha && lr->has_use) {
+                this_ends = true;
                 break;
             }
         }
 
         // Verificar se o outro web COMEÇA nesta linha
         for (LiveRange* lr : other.liveRanges) {
-            if (lr->inicio == linha && lr->tem_def) {
-                outro_comeca = true;
+            if (lr->start == linha && lr->has_def) {
+                another_starts = true;
                 break;
             }
         }
 
         // Caso especial: este morre, outro nasce → NÃO interferem
-        if (este_termina && outro_comeca) {
+        if (this_ends && another_starts) {
             // continuar para as proximas linhas
             continue;
         }
@@ -66,40 +66,40 @@ bool Web::interfereWith(const Web& other) const {
 }
 
 void Web::print() const {
-    std::cout << "web" << id << " (" << variavel << "): ";
-    std::cout << formatLinhas() << std::endl;
+    std::cout << "web" << id << " (" << variable << "): ";
+    std::cout << formatLines() << std::endl;
 }
 
-std::string Web::formatLinhas() const {
-    if (linhas.empty()) return "";
+std::string Web::formatLines() const {
+    if (lines.empty()) return "";
 
     std::string result;
-    std::vector<int> linhas_vec(linhas.begin(), linhas.end());
+    std::vector<int> lines_vec(lines.begin(), lines.end());
 
-    for (size_t i = 0; i < linhas_vec.size(); i++) {
-        int linha = linhas_vec[i];
-        result += std::to_string(linha);
+    for (size_t i = 0; i < lines_vec.size(); i++) {
+        int line = lines_vec[i];
+        result += std::to_string(line);
 
         // Verificar se tem marcador + ou -
-        bool tem_plus = false;
-        bool tem_minus = false;
+        bool has_plus = false;
+        bool has_minus = false;
 
         for (LiveRange* lr : liveRanges) {
-            if (lr->inicio == linha && lr->tem_def) {
-                tem_plus = true;
+            if (lr->start == line && lr->has_def) {
+                has_plus = true;
             }
-            if (lr->fim == linha && lr->tem_uso) {
-                tem_minus = true;
+            if (lr->end == line && lr->has_use) {
+                has_minus = true;
             }
         }
 
-        if (!(tem_plus && tem_minus)) {
-            if (tem_plus) result += "+";
-            if (tem_minus) result += "-";
+        if (!(has_plus && has_minus)) {
+            if (has_plus) result += "+";
+            if (has_minus) result += "-";
         }
 
 
-        if (i < linhas_vec.size() - 1) {
+        if (i < lines_vec.size() - 1) {
             result += ",";
         }
     }

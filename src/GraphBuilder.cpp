@@ -1,19 +1,19 @@
 
-#include "GrafoBuilder.h"
+#include "GraphBuilder.h"
 #include <iostream>
 #include <iomanip>
 #include "Graph.h"
 
-bool GrafoBuilder::sobrepoe(const LiveRange& lr1, const LiveRange& lr2) {
-    for (int linha : lr1.linhas) {
-        if (lr2.contem(linha)) {
+bool GraphBuilder::overlaps(const LiveRange& lr1, const LiveRange& lr2) {
+    for (int line : lr1.lines) {
+        if (lr2.contains(line)) {
             return true;
         }
     }
     return false;
 }
 
-std::vector<Web*> GrafoBuilder::criarWebs(std::map<std::string, std::vector<LiveRange>>& ranges) {
+std::vector<Web*> GraphBuilder::createWebs(std::map<std::string, std::vector<LiveRange>>& ranges) {
 
     std::vector<Web*> webs;
     int webId = 0;
@@ -21,58 +21,58 @@ std::vector<Web*> GrafoBuilder::criarWebs(std::map<std::string, std::vector<Live
     std::cout << "\n=== CRIANDO WEBS ===\n";
 
     for (auto& pair : ranges) { //percorrer todas as variaveis 
-        std::string variavel = pair.first;
+        std::string variable = pair.first;
         std::vector<LiveRange>& lrs = pair.second;
 
-        std::cout << "Variável: " << variavel
+        std::cout << "Variável: " << variable
                   << " (" << lrs.size() << " live range(s))\n";
 
         // Marcar quais live ranges já foram processados
-        std::vector<bool> processado(lrs.size(), false);
+        std::vector<bool> processed(lrs.size(), false);
 
         for (size_t i = 0; i < lrs.size(); i++) {
-            if (processado[i]) continue;
+            if (processed[i]) continue;
 
             // Criar novo web
             Web* web = new Web(webId++);
             web->addLiveRange(&lrs[i]);
-            processado[i] = true;
+            processed[i] = true;
 
             std::cout << "  Criando web" << web->id
                      << " com LR inicial: [";
-            for (size_t j = 0; j < lrs[i].linhas.size(); j++) {
-                std::cout << lrs[i].linhas[j];
-                if (j < lrs[i].linhas.size()-1) std::cout << ",";
+            for (size_t j = 0; j < lrs[i].lines.size(); j++) {
+                std::cout << lrs[i].lines[j];
+                if (j < lrs[i].lines.size()-1) std::cout << ",";
             }
             std::cout << "]\n";
 
             // Tentar juntar outros live ranges que se sobrepõem
-            bool adicionou = true;
-            while (adicionou) {
-                adicionou = false;
+            bool added = true;
+            while (added) {
+                added = false;
 
                 for (size_t j = 0; j < lrs.size(); j++) {
-                    if (processado[j]) continue;
+                    if (processed[j]) continue;
 
                     // Verificar se sobrepõe com algum LR já no web
-                    bool sobrepoe_com_web = false;
+                    bool overlapsWithWeb = false;
                     for (LiveRange* lr : web->liveRanges) {
-                        if (sobrepoe(*lr, lrs[j])) {
-                            sobrepoe_com_web = true;
+                        if (overlaps(*lr, lrs[j])) {
+                            overlapsWithWeb = true;
                             std::cout << "    → Fundindo com LR [";
-                            for (size_t k = 0; k < lrs[j].linhas.size(); k++) {
-                                std::cout << lrs[j].linhas[k];
-                                if (k < lrs[j].linhas.size()-1) std::cout << ",";
+                            for (size_t k = 0; k < lrs[j].lines.size(); k++) {
+                                std::cout << lrs[j].lines[k];
+                                if (k < lrs[j].lines.size()-1) std::cout << ",";
                             }
                             std::cout << "] (sobreposição detectada)\n";
                             break;
                         }
                     }
 
-                    if (sobrepoe_com_web) {
+                    if (overlapsWithWeb) {
                         web->addLiveRange(&lrs[j]);
-                        processado[j] = true;
-                        adicionou = true;
+                        processed[j] = true;
+                        added = true;
                     }
                 }
             }
@@ -88,25 +88,25 @@ std::vector<Web*> GrafoBuilder::criarWebs(std::map<std::string, std::vector<Live
     return webs;
 }
 
-Graph<Web>* GrafoBuilder::construirGrafo(std::vector<Web*>& webs) {
-    Graph<Web>* grafo = new Graph<Web>();
+Graph<Web>* GraphBuilder::buildGraph(std::vector<Web*>& webs) {
+    Graph<Web>* graph = new Graph<Web>();
 
     std::cout << "\n=== CONSTRUINDO GRAFO DE INTERFERÊNCIA ===\n";
 
     // Adicionar todos os webs como vértices
     for (Web* web : webs) {
-        grafo->addVertex(*web);
+        graph->addVertex(*web);
         std::cout << "  Adicionado vértice: web" << web->id << "\n";
     }
 
     // Verificar interferências e adicionar arestas
-    int num_arestas = 0;
+    int num_edges = 0;
     for (size_t i = 0; i < webs.size(); i++) {
         for (size_t j = i + 1; j < webs.size(); j++) {
             if (webs[i]->interfereWith(*webs[j])) {
                 // Adicionar aresta bidirecional (grafo não-dirigido)
-                grafo->addBidirectionalEdge(*webs[i], *webs[j], 1.0);
-                num_arestas++;
+                graph->addBidirectionalEdge(*webs[i], *webs[j], 1.0);
+                num_edges++;
 
                 std::cout << "  web" << webs[i]->id << " ↔ web"
                          << webs[j]->id << " (interferem)\n";
@@ -114,21 +114,21 @@ Graph<Web>* GrafoBuilder::construirGrafo(std::vector<Web*>& webs) {
         }
     }
 
-    std::cout << "\nTotal de arestas: " << num_arestas << std::endl;
+    std::cout << "\nTotal de arestas: " << num_edges << std::endl;
     std::cout << "==========================================\n";
 
-    return grafo;
+    return graph;
 }
 
-void GrafoBuilder::printGrafo(Graph<Web>* grafo, const std::vector<Web*>& webs) {
+void GraphBuilder::printGraph(Graph<Web>* graph, const std::vector<Web*>& webs) {
     std::cout << "\n=== GRAFO DE INTERFERÊNCIA ===\n";
-    std::cout << "Nós (webs): " << grafo->getNumVertex() << std::endl;
+    std::cout << "Nós (webs): " << graph->getNumVertex() << std::endl;
 
     for (Web* web : webs) {
-        Vertex<Web>* v = grafo->findVertex(*web);
+        Vertex<Web>* v = graph->findVertex(*web);
         if (v) {
             int grau = v->getAdj().size();
-            std::cout << "  web" << web->id << " (" << web->variavel << ")"
+            std::cout << "  web" << web->id << " (" << web->variable << ")"
                      << " - grau: " << grau
                         << "-color: " << v->getColor() << std::endl;
         }
@@ -136,7 +136,7 @@ void GrafoBuilder::printGrafo(Graph<Web>* grafo, const std::vector<Web*>& webs) 
 
     std::cout << "\nArestas (interferências):\n";
     for (Web* web : webs) {
-        Vertex<Web>* v = grafo->findVertex(*web);
+        Vertex<Web>* v = graph->findVertex(*web);
         if (v) {
             for (Edge<Web>* e : v->getAdj()) {
                 Web dest = e->getDest()->getInfo();
@@ -150,7 +150,7 @@ void GrafoBuilder::printGrafo(Graph<Web>* grafo, const std::vector<Web*>& webs) 
     std::cout << "==============================\n\n";
 }
 
-void GrafoBuilder::printMatriz(Graph<Web>* grafo, const std::vector<Web*>& webs) {
+void GraphBuilder::printMatrix(Graph<Web>* graph, const std::vector<Web*>& webs) {
     std::cout << "\n=== MATRIZ DE ADJACÊNCIA ===\n";
 
     // Header
@@ -168,19 +168,19 @@ void GrafoBuilder::printMatriz(Graph<Web>* grafo, const std::vector<Web*>& webs)
             if (web1->id == web2->id) {
                 std::cout << std::setw(5) << "0";
             } else {
-                Vertex<Web>* v1 = grafo->findVertex(*web1);
-                bool adjacente = false;
+                Vertex<Web>* v1 = graph->findVertex(*web1);
+                bool adjacent = false;
 
                 if (v1) {
                     for (Edge<Web>* e : v1->getAdj()) {
                         if (e->getDest()->getInfo().id == web2->id) {
-                            adjacente = true;
+                            adjacent = true;
                             break;
                         }
                     }
                 }
 
-                std::cout << std::setw(5) << (adjacente ? "1" : "0");
+                std::cout << std::setw(5) << (adjacent ? "1" : "0");
             }
         }
         std::cout << std::endl;

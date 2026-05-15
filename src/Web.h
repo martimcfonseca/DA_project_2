@@ -13,8 +13,8 @@
 class Web {
 public:
     int id;
-    std::string variavel;                // variável original
-    std::set<int> linhas;                // todas as linhas onde está vivo
+    std::string variable;                // variável original
+    std::set<int> lines;                // todas as linhas onde está vivo
     std::vector<LiveRange*> liveRanges;  // live ranges que formam este web
 
     Web(int webId) : id(webId) {}
@@ -26,12 +26,12 @@ public:
     bool interfereWith(const Web& other) const;
 
 
-    bool contem(int linha) const;
+    bool contains(int line) const;
 
 
     void print() const;
 
-    std::string formatLinhas() const;
+    std::string formatLines() const;
 
     bool operator==(const Web& other) const {
         return id == other.id;

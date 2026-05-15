@@ -11,20 +11,20 @@
 class Output {
 public:
 
-    static void gerarOutput(
+    static void generateOutput(
         const std::string& filename,
-        const std::vector<Web*>& webs_todos,
-        Graph<Web>* grafo_final,
-        int num_registos,
-        const std::vector<Vertex<Web>*>& spillados = {},
+        const std::vector<Web*>& webs_all,
+        Graph<Web>* graph_final,
+        int num_register,
+        const std::vector<Vertex<Web>*>& spilled = {},
         const std::vector<SplitInfo>& splits = {}
     );
 
-    static void printResumo(
-        const std::vector<Web*>& webs_todos,
-        Graph<Web>* grafo_final,
-        int num_registos,
-        const std::vector<Vertex<Web>*>& spillados = {},
+    static void printResume(
+        const std::vector<Web*>& webs_all,
+        Graph<Web>* graph_final,
+        int num_registers,
+        const std::vector<Vertex<Web>*>& spilled = {},
         const std::vector<SplitInfo>& splits = {}
     );
 };

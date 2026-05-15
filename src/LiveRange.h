@@ -10,10 +10,10 @@
  * Representa um ponto num live range
  */
 struct Ponto {
-    int linha;
+    int line;
     bool is_def;   // true se é definição (+), false se é uso (-)
 
-    Ponto(int l, bool def) : linha(l), is_def(def) {}
+    Ponto(int l, bool def) : line(l), is_def(def) {}
 };
 
 /**
@@ -21,18 +21,18 @@ struct Ponto {
  */
 class LiveRange {
 public:
-    std::string variavel;
-    std::vector<int> linhas;  // linhas onde a variável está viva
-    int inicio;               // primeira linha (com +)
-    int fim;                  // última linha (com -)
-    bool tem_def;             // tem marcador +?
-    bool tem_uso;             // tem marcador -?
+    std::string variable;
+    std::vector<int> lines;  // linhas onde a variável está viva
+    int start;               // primeira linha (com +)
+    int end;                  // última linha (com -)
+    bool has_def;             // tem marcador +?
+    bool has_use;             // tem marcador -?
 
-    LiveRange(const std::string& var): variavel(var), inicio(-1), fim(-1),tem_def(false), tem_uso(false) {}
+    LiveRange(const std::string& var): variable(var), start(-1), end(-1),has_def(false), has_use(false) {}
 
-    void addLinha(int linha, char marcador);
-    bool contem(int linha) const;
-    bool sobrepoe(const LiveRange& other) const;
+    void addLine(int line, char marker);
+    bool contains(int line) const;
+    bool overlaps(const LiveRange& other) const;
     void print() const;
 };
 

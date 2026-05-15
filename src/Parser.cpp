@@ -79,7 +79,7 @@ std::map<std::string, std::vector<LiveRange>> Parser::parseRanges(const std::str
 
             try {
                 numero = std::stoi(num_str);
-                lr.addLinha(numero, marcador);
+                lr.addLine(numero, marcador);
             } catch (const std::exception& e) {
                 std::cerr << "Erro ao parsear número: " << token
                          << " na linha " << linha_num << std::endl;

@@ -5,12 +5,12 @@
 #include <map>
 #include <set>
 
-void Output::gerarOutput(
+void Output::generateOutput(
     const std::string& filename,
-    const std::vector<Web*>& webs_todos,
-    Graph<Web>* grafo_final,
-    int num_registos,
-    const std::vector<Vertex<Web>*>& spillados,
+    const std::vector<Web*>& webs_all,
+    Graph<Web>* graph_final,
+    int num_register,
+    const std::vector<Vertex<Web>*>& spilled,
     const std::vector<SplitInfo>& splits) {
 
     std::ofstream file(filename);
@@ -30,17 +30,17 @@ void Output::gerarOutput(
 
         for (const auto& split : splits) {
             file << "original: web" << split.original->id
-                 << " (" << split.original->variavel << ")\n";
+                 << " (" << split.original->variable << ")\n";
 
             file << "parts: ";
-            for (size_t i = 0; i < split.partes.size(); i++) {
-                file << "web" << split.partes[i]->id;
-                if (i < split.partes.size() - 1)
+            for (size_t i = 0; i < split.parts.size(); i++) {
+                file << "web" << split.parts[i]->id;
+                if (i < split.parts.size() - 1)
                     file << ", ";
             }
 
             file << "\n";
-            file << "split_point: " << split.ponto_divisao << "\n";
+            file << "split_point: " << split.point_division << "\n";
             file << "\n";
         }
     }
@@ -51,17 +51,17 @@ void Output::gerarOutput(
 
     file << "# WEBS\n";
 
-    std::vector<Vertex<Web>*> vertices = grafo_final->getVertexSet();
+    std::vector<Vertex<Web>*> vertexes = graph_final->getVertexSet();
 
-    file << "webs: " << vertices.size() << "\n\n";
+    file << "webs: " << vertexes.size() << "\n\n";
 
-    for (auto v : vertices) {
+    for (auto v : vertexes) {
 
         Web web = v->getInfo();
 
         Web* real = nullptr;
 
-        for (Web* w : webs_todos) {
+        for (Web* w : webs_all) {
             if (w->id == web.id) {
                 real = w;
                 break;
@@ -71,7 +71,7 @@ void Output::gerarOutput(
         if (!real) continue;
 
         file << "web" << real->id << ": "
-             << real->formatLinhas() << "\n";
+             << real->formatLines() << "\n";
     }
 
     file << "\n";
@@ -82,31 +82,31 @@ void Output::gerarOutput(
 
     file << "# REGISTER ASSIGNMENT\n";
 
-    std::set<int> cores_usadas;
-    std::map<int, std::vector<int>> cor_para_webs;
+    std::set<int> used_colors;
+    std::map<int, std::vector<int>> web_colors;
 
-    for (auto v : vertices) {
+    for (auto v : vertexes) {
 
-        int cor = v->getColor();
+        int color = v->getColor();
         int web_id = v->getInfo().id;
 
-        if (cor >= 0) {
-            cores_usadas.insert(cor);
-            cor_para_webs[cor].push_back(web_id);
+        if (color >= 0) {
+            used_colors.insert(color);
+            web_colors[color].push_back(web_id);
         }
     }
 
-    file << "registers: " << cores_usadas.size() << "\n\n";
+    file << "registers: " << used_colors.size() << "\n\n";
 
-    if (cores_usadas.size()==0) {
+    if (used_colors.size()==0) {
 
-        for (auto v : vertices) {
+        for (auto v : vertexes) {
 
             Web web = v->getInfo();
 
             Web* real = nullptr;
 
-            for (Web* w : webs_todos) {
+            for (Web* w : webs_all) {
                 if (w->id == web.id) {
                     real = w;
                     break;
@@ -121,7 +121,7 @@ void Output::gerarOutput(
     }
 
     // Registos
-    for (const auto& pair : cor_para_webs) {
+    for (const auto& pair : web_colors) {
 
         int cor = pair.first;
 
@@ -134,13 +134,13 @@ void Output::gerarOutput(
     // SPILLING
     // =====================================================
 
-    if (!spillados.empty()) {
+    if (!spilled.empty()) {
 
         file << "\n";
         file << "# SPILLED WEBS\n";
-        file << "spills: " << spillados.size() << "\n\n";
+        file << "spills: " << spilled.size() << "\n\n";
 
-        for (auto v : spillados) {
+        for (auto v : spilled) {
             file << "M: web" << v->getInfo().id << "\n";
         }
     }
@@ -150,11 +150,11 @@ void Output::gerarOutput(
     std::cout << "✓ Output gerado: " << filename << std::endl;
 }
 
-void Output::printResumo(
-    const std::vector<Web*>& webs_todos,
-    Graph<Web>* grafo_final,
-    int num_registos,
-    const std::vector<Vertex<Web>*>& spillados,
+void Output::printResume(
+    const std::vector<Web*>& webs_all,
+    Graph<Web>* graph_final,
+    int num_registers,
+    const std::vector<Vertex<Web>*>& spilled,
     const std::vector<SplitInfo>& splits) {
 
     std::cout << "\n╔════════════════════════════════════════╗\n";
@@ -179,10 +179,10 @@ void Output::printResumo(
             std::cout << "║ web" << split.original->id
                       << " dividido em ";
 
-            for (size_t i = 0; i < split.partes.size(); i++) {
-                std::cout << "web" << split.partes[i]->id;
+            for (size_t i = 0; i < split.parts.size(); i++) {
+                std::cout << "web" << split.parts[i]->id;
 
-                if (i < split.partes.size() - 1)
+                if (i < split.parts.size() - 1)
                     std::cout << ",";
             }
 
@@ -196,7 +196,7 @@ void Output::printResumo(
 
     std::set<int> cores;
 
-    for (auto v : grafo_final->getVertexSet()) {
+    for (auto v : graph_final->getVertexSet()) {
         if (v->getColor() >= 0) {
             cores.insert(v->getColor());
         }
@@ -214,17 +214,17 @@ void Output::printResumo(
     // Spilling
     // =====================================================
 
-    if (!spillados.empty()) {
+    if (!spilled.empty()) {
 
         std::cout << "║ Webs em memória: "
-                  << spillados.size();
+                  << spilled.size();
 
-        if (spillados.size() < 10)
+        if (spilled.size() < 10)
             std::cout << "                 ║\n";
         else
             std::cout << "                ║\n";
 
-        for (auto v : spillados) {
+        for (auto v : spilled) {
             std::cout << "║   web"
                       << v->getInfo().id
                       << " → MEMÓRIA";

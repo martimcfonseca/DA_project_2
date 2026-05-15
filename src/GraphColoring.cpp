@@ -158,40 +158,40 @@ bool GraphColoring::colorGraphNormal(Graph<Web> *&graph, int num) {
         return true;
     }
 
-std::vector<Vertex<Web>*> GraphColoring::escolherWebsParaSplit(
+std::vector<Vertex<Web>*> GraphColoring::chooseWebsForSplit(
     Graph<Web>* graph,
     int k) {
 
-    std::vector<Vertex<Web>*> todos = graph->getVertexSet();
+    std::vector<Vertex<Web>*> all = graph->getVertexSet();
 
     // Ordenar por grau (maior primeiro)
-    std::sort(todos.begin(), todos.end(),
+    std::sort(all.begin(), all.end(),
         [](Vertex<Web>* a, Vertex<Web>* b) {
             return a->getAdj().size() > b->getAdj().size();
         }
     );
 
     // Pegar os k primeiros
-    std::vector<Vertex<Web>*> escolhidos;
-    for (int i = 0; i < k && i < (int)todos.size(); i++) {
-        escolhidos.push_back(todos[i]);
+    std::vector<Vertex<Web>*> chosen;
+    for (int i = 0; i < k && i < (int)all.size(); i++) {
+        chosen.push_back(all[i]);
     }
 
-    return escolhidos;
+    return chosen;
 }
 
 
-std::vector<Web*> GraphColoring::dividirWeb(Web* original, int& proximo_id) {
-    std::vector<Web*> partes;
+std::vector<Web*> GraphColoring::divideWeb(Web* original, int& next_id) {
+    std::vector<Web*> parts;
 
     // Converter set para vector ordenado para poder aceder por index
-    std::vector<int> linhas_vec(original->linhas.begin(),
-                                 original->linhas.end());
+    std::vector<int> linhas_vec(original->lines.begin(),
+                                 original->lines.end());
     std::sort(linhas_vec.begin(), linhas_vec.end());
 
     if (linhas_vec.empty()) {
         std::cerr << "ERRO: Web vazio não pode ser dividido!" << std::endl;
-        return partes;
+        return parts;
     }
 
     // Dividir ao meio
@@ -199,46 +199,46 @@ std::vector<Web*> GraphColoring::dividirWeb(Web* original, int& proximo_id) {
 
     if (meio == 0) {
         std::cerr << "AVISO: Web muito pequeno para dividir!" << std::endl;
-        return partes;
+        return parts;
     }
 
     // Criar parte 1 (primeira metade)
-    Web* parte1 = new Web(proximo_id++);
-    parte1->variavel = original->variavel + "_split1";
+    Web* parte1 = new Web(next_id++);
+    parte1->variable = original->variable + "_split1";
 
     for (int i = 0; i < meio; i++) {
-        parte1->linhas.insert(linhas_vec[i]);
+        parte1->lines.insert(linhas_vec[i]);
     }
 
     // Criar parte 2 (segunda metade)
-    Web* parte2 = new Web(proximo_id++);
-    parte2->variavel = original->variavel + "_split2";
+    Web* parte2 = new Web(next_id++);
+    parte2->variable = original->variable + "_split2";
 
     for (int i = meio; i < (int)linhas_vec.size(); i++) {
-        parte2->linhas.insert(linhas_vec[i]);
+        parte2->lines.insert(linhas_vec[i]);
     }
 
-    partes.push_back(parte1);
-    partes.push_back(parte2);
+    parts.push_back(parte1);
+    parts.push_back(parte2);
 
     std::cout << "  Dividido web" << original->id
-              << " (" << original->variavel << ") em:\n";
-    std::cout << "    → " << parte1->variavel << " [";
-    for (int l : parte1->linhas) std::cout << l << ",";
+              << " (" << original->variable << ") em:\n";
+    std::cout << "    → " << parte1->variable << " [";
+    for (int l : parte1->lines) std::cout << l << ",";
     std::cout << "]\n";
-    std::cout << "    → " << parte2->variavel << " [";
-    for (int l : parte2->linhas) std::cout << l << ",";
+    std::cout << "    → " << parte2->variable << " [";
+    for (int l : parte2->lines) std::cout << l << ",";
     std::cout << "]\n";
     std::cout << "    Ponto de divisão: linha "
               << linhas_vec[meio-1] << "/" << linhas_vec[meio] << "\n";
 
-    return partes;
+    return parts;
 }
 
-Graph<Web>* GraphColoring::reconstruirGrafo(
-    Graph<Web>* grafo_original,
+Graph<Web>* GraphColoring::rebuildGrafo(
+    Graph<Web>* original_graph,
     const std::vector<SplitInfo>& splits,
-    const std::vector<Web*>& todos_webs) {
+    const std::vector<Web*>& all_webs) {
 
     // Criar novo grafo
     Graph<Web>* novo_grafo = new Graph<Web>();
@@ -250,7 +250,7 @@ Graph<Web>* GraphColoring::reconstruirGrafo(
     }
 
     // Adicionar todos os vértices (webs originais não divididos + partes)
-    for (Web* web : todos_webs) {
+    for (Web* web : all_webs) {
         // Verificar se este web foi dividido
         bool foi_dividido = false;
         for (const auto& split : splits) {
@@ -268,7 +268,7 @@ Graph<Web>* GraphColoring::reconstruirGrafo(
 
     // Adicionar as partes dos webs divididos
     for (const auto& split : splits) {
-        for (Web* parte : split.partes) {
+        for (Web* parte : split.parts) {
             novo_grafo->addVertex(*parte);
         }
     }
@@ -286,14 +286,14 @@ Graph<Web>* GraphColoring::reconstruirGrafo(
             Web* w2 = nullptr;
 
             // Encontrar os webs reais na lista
-            for (Web* w : todos_webs) {
+            for (Web* w : all_webs) {
                 if (w->id == web1.id) w1 = w;
                 if (w->id == web2.id) w2 = w;
             }
 
             // Verificar também nas partes
             for (const auto& split : splits) {
-                for (Web* parte : split.partes) {
+                for (Web* parte : split.parts) {
                     if (parte->id == web1.id) w1 = parte;
                     if (parte->id == web2.id) w2 = parte;
                 }
@@ -328,7 +328,7 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
 
         // 1. Escolher webs para dividir (maior grau)
         std::vector<Vertex<Web>*> vertices_para_dividir =
-            escolherWebsParaSplit(graph, num_splits);
+            chooseWebsForSplit(graph, num_splits);
 
         if (vertices_para_dividir.empty()) {
             std::cout << "  Nenhum web para dividir!\n";
@@ -338,7 +338,7 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
         std::cout << "  Webs escolhidos (maior grau):\n";
         for (auto v : vertices_para_dividir) {
             Web web = v->getInfo();
-            std::cout << "    web" << web.id << " (" << web.variavel
+            std::cout << "    web" << web.id << " (" << web.variable
                      << ") - grau: " << v->getAdj().size() << "\n";
         }
         std::cout << "\n";
@@ -364,18 +364,18 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
             }
 
             // Dividir
-            std::vector<Web*> partes = dividirWeb(web_ptr, proximo_id);
+            std::vector<Web*> partes = divideWeb(web_ptr, proximo_id);
 
             if (partes.size() == 2) {
                 SplitInfo info;
                 info.original = web_ptr;
-                info.partes = partes;
+                info.parts = partes;
 
                 // Calcular ponto de divisão
-                std::vector<int> linhas_orig(web_ptr->linhas.begin(),
-                                            web_ptr->linhas.end());
+                std::vector<int> linhas_orig(web_ptr->lines.begin(),
+                                            web_ptr->lines.end());
                 std::sort(linhas_orig.begin(), linhas_orig.end());
-                info.ponto_divisao = linhas_orig[linhas_orig.size()/2 - 1];
+                info.point_division = linhas_orig[linhas_orig.size()/2 - 1];
 
                 splits_info.push_back(info);
 
@@ -388,7 +388,7 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
         std::cout << "\n";
 
         // 3. Reconstruir grafo
-        Graph<Web>* novo_grafo = reconstruirGrafo(
+        Graph<Web>* novo_grafo = rebuildGrafo(
             graph,
             splits_info,
             webs_todos
