@@ -38,10 +38,13 @@ void printMenu() {
  *   - Basic coloring: O(v + e)
  *   - Spilling: O(v² + e)
  *   - Splitting: potentially exponential (worst case)
+ *   - Free algorithm O(l * v * r)
  *
  * Where:
  * - v = number of webs
  * - e = number of interference edges
+ * - l = number of program lines
+ * - r = number of available registers
  *
  * Space Complexity:
  * - O(v + e)

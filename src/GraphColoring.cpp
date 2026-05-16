@@ -486,7 +486,36 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
     return nullptr;
 }
 
-
+/**
+ * @brief Performs register allocation using a free-register assignment strategy.
+ *
+ * This algorithm scans program lines sequentially and dynamically assigns
+ * available registers to active webs.
+ *
+ * A register can be reused if:
+ * - it is currently free, or
+ * - the assigned web does not interfere with the current web.
+ *
+ * If no register is available, the web is spilled to memory.
+ *
+ * Time Complexity:
+ * - O(l * v * r)
+ *
+ * Where:
+ * - l = number of program lines
+ * - v = number of webs (vertices)
+ * - r = number of available registers
+ *
+ * Worst case:
+ * - every line checks every web and every register.
+ *
+ * Space Complexity:
+ * - O(v + r)
+ *
+ * @param graph Interference graph.
+ * @param num Number of available registers.
+ * @return Vector containing spilled webs.
+ */
 std::vector<Vertex<Web>*> GraphColoring::freeRegisterAssign(Graph<Web> *graph, int num) {
 
     auto vertexWebs = graph->getVertexSet();
