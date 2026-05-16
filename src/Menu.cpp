@@ -5,7 +5,7 @@
 #include "Menu.h"
 #include "GraphColoring.h"
 #include "GraphBuilder.h"
-#include "output.h"
+#include "Output.h"
 #include "Graph.h"
 
 
@@ -130,7 +130,7 @@ void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegist
                         sucess = (graph_final != nullptr);
 
                     } else if (algorithm == "free") {
-                        spilled = GraphColoring::linearScan(graph,numRegisters);
+                        spilled = GraphColoring::freeRegisterAssign(graph,numRegisters);
                     }
 
                     else {
