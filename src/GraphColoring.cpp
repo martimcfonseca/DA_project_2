@@ -483,7 +483,7 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
     std::cout << "✗ Falhou mesmo com " << max_splits << " splits.\n";
     std::cout << "=====================\n\n";
 
-    return nullptr;
+    return graph;
 }
 
 /**
