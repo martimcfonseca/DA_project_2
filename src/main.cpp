@@ -91,7 +91,7 @@
 #include "Parser.h"
 #include "GraphBuilder.h"
 #include "GraphColoring.h"
-#include "output.h"
+#include "Output.h"
 #include <iostream>
 
 #include "Menu.h"
