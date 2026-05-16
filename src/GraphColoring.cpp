@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <iostream>
 #include <algorithm>
+#include <map>
 #include <set>
 /**
  * @brief Performs graph coloring using a spilling-based strategy.
@@ -483,4 +484,36 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
     std::cout << "=====================\n\n";
 
     return nullptr;
+}
+
+bool sortWebs(const Web& a, const Web& b) {
+    return *a.lines.begin() < *b.lines.begin();
+}
+
+std::vector<Vertex<Web>*> GraphColoring::linearScan(Graph<Web> *graph, int num) {
+
+    auto vertexWebs = graph->getVertexSet();
+    std::vector<Web> webs;
+    for (auto v : vertexWebs) {
+        webs.push_back(v->getInfo());
+    }
+
+    std::sort(webs.begin(), webs.end(), sortWebs);
+
+    std::vector<int> registers(num);
+    std::vector<bool> used(num);
+
+    registers[0] = webs[0].id;
+    used[0] = true;
+    for (unsigned int i=1; i<webs.size(); i++) {
+        bool registered = false;
+        for (int j=0 ; j<num; j++) {
+            if (!used[j]) {
+                registered = true;
+                registers[j] = webs[i].id;
+            }
+        }
+    }
+    std::vector<Vertex<Web>*> result;
+    return result;
 }

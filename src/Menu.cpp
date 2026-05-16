@@ -126,7 +126,11 @@ void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegist
 
                         sucess = (graph_final != nullptr);
 
-                    } else {
+                    } else if (algorithm == "free") {
+                        spilled = GraphColoring::linearScan(graph,numRegisters);
+                    }
+
+                    else {
                         std::cerr << "Algoritmo desconhecido: " << algorithm << std::endl;
                     }
 
