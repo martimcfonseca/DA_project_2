@@ -486,34 +486,47 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
     return nullptr;
 }
 
-bool sortWebs(const Web& a, const Web& b) {
-    return *a.lines.begin() < *b.lines.begin();
-}
 
-std::vector<Vertex<Web>*> GraphColoring::linearScan(Graph<Web> *graph, int num) {
+std::vector<Vertex<Web>*> GraphColoring::freeRegisterAssign(Graph<Web> *graph, int num) {
 
     auto vertexWebs = graph->getVertexSet();
-    std::vector<Web> webs;
-    for (auto v : vertexWebs) {
-        webs.push_back(v->getInfo());
+
+
+    std::vector<bool> allocated(vertexWebs.size(), false);
+    std::map<int,Vertex<Web>*> webMap;
+    std::vector<Vertex<Web>*> spilled_webs;
+
+    int lastLine = 0;
+    for (auto &v : vertexWebs) {
+        Web w = v->getInfo();
+        lastLine = std::max(lastLine,*w.lines.rbegin());
     }
 
-    std::sort(webs.begin(), webs.end(), sortWebs);
+    for ( int i=1; i<lastLine; i++) {
+        for (auto& v : vertexWebs) {
+            Web web = v->getInfo();
+            if (!web.contains(i)) continue;
+            if (allocated[web.id] ) continue;
 
-    std::vector<int> registers(num);
-    std::vector<bool> used(num);
-
-    registers[0] = webs[0].id;
-    used[0] = true;
-    for (unsigned int i=1; i<webs.size(); i++) {
-        bool registered = false;
-        for (int j=0 ; j<num; j++) {
-            if (!used[j]) {
-                registered = true;
-                registers[j] = webs[i].id;
+                bool found = false;
+                for (int j=0; j<num; j++) {
+                    if (webMap.find(j) == webMap.end() || !webMap[j]->getInfo().interfereWith(web)) {
+                        if (v->getColor() != -1 && v->getColor() != webMap[j]->getColor()) continue;
+                        if (webMap.count(j) && webMap[j]->getInfo().id != -1) {
+                            allocated[webMap[j]->getInfo().id] = false;
+                        }
+                        webMap[j]= v;
+                        v->setColor(j);
+                        allocated[web.id] = true;
+                        found=true;
+                        break;
+                    }
+                }
+            if (!found) {
+                spilled_webs.push_back(v);
+                v->setColor(-1);
             }
         }
     }
-    std::vector<Vertex<Web>*> result;
-    return result;
+    return spilled_webs;
 }

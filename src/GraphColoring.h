@@ -57,7 +57,7 @@ class GraphColoring {
      */
     static Graph<Web>* colorGraphSplitting(Graph<Web>*& graph,int num,int max_splits,std::vector<SplitInfo>& splits_info,std::vector<Web*>& all_webs);
 
-    static std::vector<Vertex<Web>*> linearScan(Graph<Web>* graph, int num);
+    static std::vector<Vertex<Web>*> freeRegisterAssign(Graph<Web>* graph, int num);
     private:
     /**
     * @brief Selects candidate webs to be split
