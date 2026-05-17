@@ -334,9 +334,11 @@ Graph<Web>* GraphColoring::rebuildGraph(
 
     // Adicionar as partes dos webs divididos
     for (const auto& split : splits) {
-        for (Web* parte : split.parts) {
-            new_graph->addVertex(*parte);
-        }
+        new_graph->addVertex(*split.parts[0]);
+        if (split.parts.size() == 3)
+            new_graph->addVertex(*split.parts[2]);  // skip parts[1]
+        else
+            new_graph->addVertex(*split.parts[1]);
     }
 
     // Reconstruir arestas verificando interferências
@@ -461,7 +463,7 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
             std::vector<Web*> partes =
                 divideWeb(web_ptr, proximo_id);
 
-            if (partes.size() != 2) continue;
+            if (partes.size() != 3) continue;
 
             // guardar split info
             SplitInfo info;
@@ -484,7 +486,7 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
             current_webs.push_back(partes[0]);
             current_webs.push_back(partes[2]);
 
-            Web temp = *partes[2];
+            Web temp = *partes[1];
             Vertex<Web>* vertex = new Vertex<Web>(temp);
             spilled.push_back(vertex);
         }
