@@ -74,7 +74,7 @@
  * - Live range parsing: O(n)
  * - Web construction: O(n²)
  * - Graph construction: O(w²)
- * - Greedy coloring: O(v + e)
+ * - Greedy coloring: O(v² + e)
  * - Spilling strategy: O(v² + e)
  * - Splitting strategy: potentially O(v³ * k)
  *

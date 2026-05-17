@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['main_0',['main',['../CMakeCCompilerId_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCXXCompilerId.cpp'],['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp']]],
-  ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['menu_2ecpp_2',['Menu.cpp',['../Menu_8cpp.html',1,'']]],
-  ['menu_2eh_3',['Menu.h',['../Menu_8h.html',1,'']]]
+  ['of_20datasets_20for_20the_20basic_20algorithm_0',['Description of datasets for the basic algorithm',['../md_basic_2README.html',1,'']]],
+  ['output_1',['output',['../classOutput.html',1,'Output'],['../md_basic_2README.html#autotoc_md1',1,'Output']]],
+  ['overlaps_2',['overlaps',['../classLiveRange.html#a4add90b48afd669f7a2c27ebb75066e4',1,'LiveRange']]],
+  ['overview_3',['Complexity Overview',['../index.html#complexity_sec',1,'']]]
 ];

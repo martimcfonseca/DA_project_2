@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Register Allocation Tool: LiveRange Class Reference</title>
+<title>REGALLOC: LiveRange Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Register Allocation Tool
+   <div id="projectname">REGALLOC
    </div>
   </td>
  </tr>
@@ -84,7 +84,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abfaff240484f4902bbc64c38f62374be" id="r_abfaff240484f4902bbc64c38f62374be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#abfaff240484f4902bbc64c38f62374be">LiveRange</a> (<a class="el" href="classEdge.html">const</a> std::string &amp;<a class="el" href="classEdge.html">var</a>)</td></tr>
+<tr class="memitem:abfaff240484f4902bbc64c38f62374be" id="r_abfaff240484f4902bbc64c38f62374be"><td class="memItemLeft" align="right" valign="top"><a id="abfaff240484f4902bbc64c38f62374be" name="abfaff240484f4902bbc64c38f62374be"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>LiveRange</b> (<a class="el" href="classEdge.html">const</a> std::string &amp;<a class="el" href="classEdge.html">var</a>)</td></tr>
 <tr class="separator:abfaff240484f4902bbc64c38f62374be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b39824a24953aa93d9966516f523be4" id="r_a3b39824a24953aa93d9966516f523be4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#a3b39824a24953aa93d9966516f523be4">addLine</a> (<a class="el" href="classEdge.html">int</a> line, <a class="el" href="classEdge.html">char</a> <a class="el" href="classEdge.html">marker</a>)</td></tr>
 <tr class="memdesc:a3b39824a24953aa93d9966516f523be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a line to the live range.  <br /></td></tr>
@@ -95,55 +96,35 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4add90b48afd669f7a2c27ebb75066e4" id="r_a4add90b48afd669f7a2c27ebb75066e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#a4add90b48afd669f7a2c27ebb75066e4">overlaps</a> (<a class="el" href="classEdge.html">const</a> <a class="el" href="classLiveRange.html">LiveRange</a> &amp;<a class="el" href="classEdge.html">other</a>) <a class="el" href="classEdge.html">const</a></td></tr>
 <tr class="memdesc:a4add90b48afd669f7a2c27ebb75066e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether this live range overlaps another.  <br /></td></tr>
 <tr class="separator:a4add90b48afd669f7a2c27ebb75066e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a227023ed8cbdc58ebb6b457d5df346b9" id="r_a227023ed8cbdc58ebb6b457d5df346b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#a227023ed8cbdc58ebb6b457d5df346b9">print</a> () <a class="el" href="classEdge.html">const</a></td></tr>
+<tr class="memitem:a227023ed8cbdc58ebb6b457d5df346b9" id="r_a227023ed8cbdc58ebb6b457d5df346b9"><td class="memItemLeft" align="right" valign="top"><a id="a227023ed8cbdc58ebb6b457d5df346b9" name="a227023ed8cbdc58ebb6b457d5df346b9"></a>
+<a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> () <a class="el" href="classEdge.html">const</a></td></tr>
 <tr class="separator:a227023ed8cbdc58ebb6b457d5df346b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a83f4bdb3ba704524fddd14b1d975d7c8" id="r_a83f4bdb3ba704524fddd14b1d975d7c8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#a83f4bdb3ba704524fddd14b1d975d7c8">variable</a></td></tr>
+<tr class="memitem:a83f4bdb3ba704524fddd14b1d975d7c8" id="r_a83f4bdb3ba704524fddd14b1d975d7c8"><td class="memItemLeft" align="right" valign="top"><a id="a83f4bdb3ba704524fddd14b1d975d7c8" name="a83f4bdb3ba704524fddd14b1d975d7c8"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>variable</b></td></tr>
 <tr class="separator:a83f4bdb3ba704524fddd14b1d975d7c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a123edd76f7cd5f57ecd4a90c1080263f" id="r_a123edd76f7cd5f57ecd4a90c1080263f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classEdge.html">int</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#a123edd76f7cd5f57ecd4a90c1080263f">lines</a></td></tr>
+<tr class="memitem:a123edd76f7cd5f57ecd4a90c1080263f" id="r_a123edd76f7cd5f57ecd4a90c1080263f"><td class="memItemLeft" align="right" valign="top"><a id="a123edd76f7cd5f57ecd4a90c1080263f" name="a123edd76f7cd5f57ecd4a90c1080263f"></a>
+std::vector&lt; <a class="el" href="classEdge.html">int</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>lines</b></td></tr>
 <tr class="separator:a123edd76f7cd5f57ecd4a90c1080263f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17d98a53ee8886e5006903bdbb6ca51e" id="r_a17d98a53ee8886e5006903bdbb6ca51e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#a17d98a53ee8886e5006903bdbb6ca51e">start</a></td></tr>
+<tr class="memitem:a17d98a53ee8886e5006903bdbb6ca51e" id="r_a17d98a53ee8886e5006903bdbb6ca51e"><td class="memItemLeft" align="right" valign="top"><a id="a17d98a53ee8886e5006903bdbb6ca51e" name="a17d98a53ee8886e5006903bdbb6ca51e"></a>
+<a class="el" href="classEdge.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>start</b></td></tr>
 <tr class="separator:a17d98a53ee8886e5006903bdbb6ca51e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b20bc0723e2f31020def3b7a98a8214" id="r_a1b20bc0723e2f31020def3b7a98a8214"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#a1b20bc0723e2f31020def3b7a98a8214">end</a></td></tr>
+<tr class="memitem:a1b20bc0723e2f31020def3b7a98a8214" id="r_a1b20bc0723e2f31020def3b7a98a8214"><td class="memItemLeft" align="right" valign="top"><a id="a1b20bc0723e2f31020def3b7a98a8214" name="a1b20bc0723e2f31020def3b7a98a8214"></a>
+<a class="el" href="classEdge.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b></td></tr>
 <tr class="separator:a1b20bc0723e2f31020def3b7a98a8214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fae94c5cdc322f1d5ee2a8e3806bf05" id="r_a2fae94c5cdc322f1d5ee2a8e3806bf05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#a2fae94c5cdc322f1d5ee2a8e3806bf05">has_def</a></td></tr>
+<tr class="memitem:a2fae94c5cdc322f1d5ee2a8e3806bf05" id="r_a2fae94c5cdc322f1d5ee2a8e3806bf05"><td class="memItemLeft" align="right" valign="top"><a id="a2fae94c5cdc322f1d5ee2a8e3806bf05" name="a2fae94c5cdc322f1d5ee2a8e3806bf05"></a>
+<a class="el" href="classEdge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>has_def</b></td></tr>
 <tr class="separator:a2fae94c5cdc322f1d5ee2a8e3806bf05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9fc493d8dc3a9ccbef0384c1ec8e546" id="r_ae9fc493d8dc3a9ccbef0384c1ec8e546"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveRange.html#ae9fc493d8dc3a9ccbef0384c1ec8e546">has_use</a></td></tr>
+<tr class="memitem:ae9fc493d8dc3a9ccbef0384c1ec8e546" id="r_ae9fc493d8dc3a9ccbef0384c1ec8e546"><td class="memItemLeft" align="right" valign="top"><a id="ae9fc493d8dc3a9ccbef0384c1ec8e546" name="ae9fc493d8dc3a9ccbef0384c1ec8e546"></a>
+<a class="el" href="classEdge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>has_use</b></td></tr>
 <tr class="separator:ae9fc493d8dc3a9ccbef0384c1ec8e546"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the live range of a variable. </p>
 <p>A live range stores all lines where a variable is alive, together with information about its definition and usage. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abfaff240484f4902bbc64c38f62374be" name="abfaff240484f4902bbc64c38f62374be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfaff240484f4902bbc64c38f62374be">&#9670;&#160;</a></span>LiveRange()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">LiveRange::LiveRange </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classEdge.html">const</a> std::string &amp;&#160;</td>
-          <td class="paramname"><em>var</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3b39824a24953aa93d9966516f523be4" name="a3b39824a24953aa93d9966516f523be4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3b39824a24953aa93d9966516f523be4">&#9670;&#160;</a></span>addLine()</h2>
 
@@ -270,111 +251,9 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a227023ed8cbdc58ebb6b457d5df346b9" name="a227023ed8cbdc58ebb6b457d5df346b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a227023ed8cbdc58ebb6b457d5df346b9">&#9670;&#160;</a></span>print()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classEdge.html">void</a> LiveRange::print </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a1b20bc0723e2f31020def3b7a98a8214" name="a1b20bc0723e2f31020def3b7a98a8214"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b20bc0723e2f31020def3b7a98a8214">&#9670;&#160;</a></span>end</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classEdge.html">int</a> LiveRange::end</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a2fae94c5cdc322f1d5ee2a8e3806bf05" name="a2fae94c5cdc322f1d5ee2a8e3806bf05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2fae94c5cdc322f1d5ee2a8e3806bf05">&#9670;&#160;</a></span>has_def</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classEdge.html">bool</a> LiveRange::has_def</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae9fc493d8dc3a9ccbef0384c1ec8e546" name="ae9fc493d8dc3a9ccbef0384c1ec8e546"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9fc493d8dc3a9ccbef0384c1ec8e546">&#9670;&#160;</a></span>has_use</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classEdge.html">bool</a> LiveRange::has_use</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a123edd76f7cd5f57ecd4a90c1080263f" name="a123edd76f7cd5f57ecd4a90c1080263f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a123edd76f7cd5f57ecd4a90c1080263f">&#9670;&#160;</a></span>lines</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classEdge.html">int</a>&gt; LiveRange::lines</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a17d98a53ee8886e5006903bdbb6ca51e" name="a17d98a53ee8886e5006903bdbb6ca51e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17d98a53ee8886e5006903bdbb6ca51e">&#9670;&#160;</a></span>start</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classEdge.html">int</a> LiveRange::start</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a83f4bdb3ba704524fddd14b1d975d7c8" name="a83f4bdb3ba704524fddd14b1d975d7c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83f4bdb3ba704524fddd14b1d975d7c8">&#9670;&#160;</a></span>variable</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string LiveRange::variable</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="LiveRange_8h_source.html">LiveRange.h</a></li>
-<li>src/<a class="el" href="LiveRange_8cpp.html">LiveRange.cpp</a></li>
+<li>src/<b>LiveRange.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Register Allocation Tool: GraphBuilder Class Reference</title>
+<title>REGALLOC: GraphBuilder Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Register Allocation Tool
+   <div id="projectname">REGALLOC
    </div>
   </td>
  </tr>
@@ -75,8 +75,6 @@ $(function() {
   <div class="headertitle"><div class="title">GraphBuilder Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><code>#include &lt;<a class="el" href="GraphBuilder_8h_source.html">GraphBuilder.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -86,9 +84,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac956c96bd85a39a3c73b01e25fda2c01" id="r_ac956c96bd85a39a3c73b01e25fda2c01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphBuilder.html#ac956c96bd85a39a3c73b01e25fda2c01">buildGraph</a> (std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">webs</a>)</td></tr>
 <tr class="memdesc:ac956c96bd85a39a3c73b01e25fda2c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds an interference graph from a set of webs.  <br /></td></tr>
 <tr class="separator:ac956c96bd85a39a3c73b01e25fda2c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae31b3d0fadaac3b80098cbf20e5d880" id="r_aae31b3d0fadaac3b80098cbf20e5d880"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphBuilder.html#aae31b3d0fadaac3b80098cbf20e5d880">printGraph</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">webs</a>)</td></tr>
+<tr class="memitem:aae31b3d0fadaac3b80098cbf20e5d880" id="r_aae31b3d0fadaac3b80098cbf20e5d880"><td class="memItemLeft" align="right" valign="top"><a id="aae31b3d0fadaac3b80098cbf20e5d880" name="aae31b3d0fadaac3b80098cbf20e5d880"></a>
+<a class="el" href="classEdge.html">static</a> <a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>printGraph</b> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">webs</a>)</td></tr>
 <tr class="separator:aae31b3d0fadaac3b80098cbf20e5d880"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac7dc2ae6e91f9d5264aef8c0f9816e8" id="r_aac7dc2ae6e91f9d5264aef8c0f9816e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphBuilder.html#aac7dc2ae6e91f9d5264aef8c0f9816e8">printMatrix</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">webs</a>)</td></tr>
+<tr class="memitem:aac7dc2ae6e91f9d5264aef8c0f9816e8" id="r_aac7dc2ae6e91f9d5264aef8c0f9816e8"><td class="memItemLeft" align="right" valign="top"><a id="aac7dc2ae6e91f9d5264aef8c0f9816e8" name="aac7dc2ae6e91f9d5264aef8c0f9816e8"></a>
+<a class="el" href="classEdge.html">static</a> <a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>printMatrix</b> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">webs</a>)</td></tr>
 <tr class="separator:aac7dc2ae6e91f9d5264aef8c0f9816e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -195,81 +195,9 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aae31b3d0fadaac3b80098cbf20e5d880" name="aae31b3d0fadaac3b80098cbf20e5d880"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae31b3d0fadaac3b80098cbf20e5d880">&#9670;&#160;</a></span>printGraph()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classEdge.html">void</a> GraphBuilder::printGraph </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;&#160;</td>
-          <td class="paramname"><em>webs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aac7dc2ae6e91f9d5264aef8c0f9816e8" name="aac7dc2ae6e91f9d5264aef8c0f9816e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac7dc2ae6e91f9d5264aef8c0f9816e8">&#9670;&#160;</a></span>printMatrix()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classEdge.html">void</a> GraphBuilder::printMatrix </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;&#160;</td>
-          <td class="paramname"><em>webs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="GraphBuilder_8h_source.html">GraphBuilder.h</a></li>
-<li>src/<a class="el" href="GraphBuilder_8cpp.html">GraphBuilder.cpp</a></li>
+<li>src/<b>GraphBuilder.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

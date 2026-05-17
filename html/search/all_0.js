@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['_5f_5fhas_5finclude_0',['__has_include',['../CMakeCCompilerId_8c.html#ae5510d82e4946f1656f4969911c54736',1,'__has_include:&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#ae5510d82e4946f1656f4969911c54736',1,'__has_include:&#160;CMakeCXXCompilerId.cpp']]]
+  ['addline_0',['addLine',['../classLiveRange.html#a3b39824a24953aa93d9966516f523be4',1,'LiveRange']]],
+  ['addliverange_1',['addLiveRange',['../classWeb.html#a681ac06ea1625abf6594c84d1c82b462',1,'Web']]],
+  ['algorithm_2',['Description of datasets for the basic algorithm',['../md_basic_2README.html',1,'']]],
+  ['allocation_20tool_3',['Register Allocation Tool',['../index.html',1,'']]]
 ];
