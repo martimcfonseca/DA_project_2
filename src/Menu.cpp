@@ -123,6 +123,7 @@ void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegist
                             graph,
                             numRegisters,
                             parameters,
+                            spilled,
                             splits,
                             webs
                         );

@@ -103,9 +103,9 @@ int main(int argc, char* argv[]) {
 
 
      if (argc == 5 && std::string(argv[1]) == "-b") {   //Modo batch "-b"
-         std::string rangesFile = argv[1];
-         std::string registersFile = argv[2];
-         std::string outputFile = argv[3];
+         std::string rangesFile = argv[2];
+         std::string registersFile = argv[3];
+         std::string outputFile = argv[4];
          try {
              auto ranges = Parser::parseRanges(rangesFile);
              int numRegistos = 0;
@@ -134,6 +134,7 @@ int main(int argc, char* argv[]) {
                      grafo,
                      numRegistos,
                      parametro,
+                     spillados,
                      splits,
                      webs
                  );

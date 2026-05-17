@@ -250,7 +250,7 @@ std::vector<Web*> GraphColoring::divideWeb(Web* original, int& next_id) {
         return parts;
     }
 
-    // Criar parte 1 (primeira metade)
+    // Criar parte 1 (primeira parte)
     Web* parte1 = new Web(next_id++);
     parte1->variable = original->variable + "_split1";
 
@@ -258,16 +258,25 @@ std::vector<Web*> GraphColoring::divideWeb(Web* original, int& next_id) {
         parte1->lines.insert(linhas_vec[i]);
     }
 
-    // Criar parte 2 (segunda metade)
+    // Criar parte 2 (meio para ser spilled)
     Web* parte2 = new Web(next_id++);
     parte2->variable = original->variable + "_split2";
 
-    for (int i = meio+1; i < (int)linhas_vec.size(); i++) {
+    for (int i = meio-1; i < meio+1; i++) {
         parte2->lines.insert(linhas_vec[i]);
+    }
+
+    // Criar parte 3 (segunda metade)
+    Web* parte3 = new Web(next_id++);
+    parte3->variable = original->variable + "_split3";
+
+    for (int i = meio+1; i < (int)linhas_vec.size(); i++) {
+        parte3->lines.insert(linhas_vec[i]);
     }
 
     parts.push_back(parte1);
     parts.push_back(parte2);
+    parts.push_back(parte3);
 
     std::cout << "  Dividido web" << original->id
               << " (" << original->variable << ") em:\n";
@@ -276,6 +285,9 @@ std::vector<Web*> GraphColoring::divideWeb(Web* original, int& next_id) {
     std::cout << "]\n";
     std::cout << "    → " << parte2->variable << " [";
     for (int l : parte2->lines) std::cout << l << ",";
+    std::cout << "]\n";
+    std::cout << "    → " << parte3->variable << " [";
+    for (int l : parte3->lines) std::cout << l << ",";
     std::cout << "]\n";
     std::cout << "    Ponto de divisão: linha "
               << linhas_vec[meio-1] << "/" << linhas_vec[meio] << "\n";
@@ -374,6 +386,7 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
     Graph<Web>*& graph,
     int num,
     int max_splits,
+    std::vector<Vertex<Web>*>& spilled,
     std::vector<SplitInfo>& splits_info,
     std::vector<Web*>& all_webs) {
 
@@ -469,7 +482,11 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
 
             // adicionar partes ao vetor temporário
             current_webs.push_back(partes[0]);
-            current_webs.push_back(partes[1]);
+            current_webs.push_back(partes[2]);
+
+            Web temp = *partes[2];
+            Vertex<Web>* vertex = new Vertex<Web>(temp);
+            spilled.push_back(vertex);
         }
 
         std::cout << "\n";
