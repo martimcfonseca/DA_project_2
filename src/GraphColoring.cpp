@@ -318,14 +318,20 @@ Graph<Web>* GraphColoring::rebuildGraph(
     // Adicionar todos os vértices (webs originais não divididos + partes)
     for (Web* web : all_webs) {
         bool was_divided = false;
+        bool is_spilled_middle = false;
         for (const auto& split : splits) {
             if (split.original->id == web->id) {
                 was_divided = true;
                 break;
             }
+            // check if this web is the spilled middle part of any split
+            if (split.parts.size() == 3 && split.parts[1]->id == web->id) {
+                is_spilled_middle = true;
+                break;
+            }
         }
 
-        if (!was_divided) {
+        if (!was_divided && !is_spilled_middle) {
             new_graph->addVertex(*web);
         }
     }
@@ -396,6 +402,11 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
 
     // GUARDAR webs originais
     std::vector<Web*> original_webs = all_webs;
+
+    if (colorGraphNormal(graph,num)) {
+        std::cout << "Graph was sucessfully colored without splitting\n";
+        return graph;
+    }
 
     // Tentar 1..max_splits
     for (int num_splits = 1; num_splits <= max_splits; num_splits++) {
@@ -522,10 +533,6 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
 
         bool sucesso =
             colorGraphNormal(novo_grafo, num);
-
-        for (auto w : spilled) {
-            novo_grafo->findVertex(w->getInfo())->setColor(-1);
-        }
 
         if (sucesso) {
 
