@@ -554,6 +554,7 @@ std::vector<Vertex<Web>*> GraphColoring::freeRegisterAssign(Graph<Web> *graph, i
             if (!found) {
                 spilled_webs.push_back(v);
                 v->setColor(-1);
+                allocated[web.id] = true;
             }
         }
     }
