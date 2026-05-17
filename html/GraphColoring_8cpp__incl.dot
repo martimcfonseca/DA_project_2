@@ -37,5 +37,7 @@ digraph "src/GraphColoring.cpp"
   Node14 [id="Node000014",label="unordered_map",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node1 -> Node4 [id="edge18_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
   Node1 -> Node8 [id="edge19_Node000001_Node000008",color="steelblue1",style="solid",tooltip=" "];
-  Node1 -> Node12 [id="edge20_Node000001_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node15 [id="edge20_Node000001_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="map",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node12 [id="edge21_Node000001_Node000012",color="steelblue1",style="solid",tooltip=" "];
 }

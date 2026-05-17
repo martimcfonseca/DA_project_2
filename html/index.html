@@ -80,6 +80,7 @@ Introduction</h1>
 <li>Basic graph coloring</li>
 <li>Spilling-based allocation</li>
 <li>Splitting-based allocation</li>
+<li>Free-register dynamic allocation</li>
 </ul>
 <p>The goal is to assign a limited number of CPU registers while minimizing memory spills and handling register pressure efficiently.</p>
 <h1><a class="anchor" id="usage_sec"></a>
@@ -95,6 +96,7 @@ Usage</h1>
 <li>"basic" → standard graph coloring</li>
 <li>"spilling" → removes high-degree nodes (spill to memory)</li>
 <li>"splitting" → splits webs to reduce interference</li>
+<li>"free-register" → dynamically assigns free registers during execution</li>
 </ul>
 <h1><a class="anchor" id="structure_sec"></a>
 Code Structure</h1>

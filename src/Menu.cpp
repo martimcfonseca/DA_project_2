@@ -5,7 +5,7 @@
 #include "Menu.h"
 #include "GraphColoring.h"
 #include "GraphBuilder.h"
-#include "output.h"
+#include "Output.h"
 #include "Graph.h"
 
 
@@ -38,10 +38,13 @@ void printMenu() {
  *   - Basic coloring: O(v + e)
  *   - Spilling: O(v² + e)
  *   - Splitting: potentially exponential (worst case)
+ *   - Free algorithm O(l * v * r)
  *
  * Where:
  * - v = number of webs
  * - e = number of interference edges
+ * - l = number of program lines
+ * - r = number of available registers
  *
  * Space Complexity:
  * - O(v + e)
@@ -126,7 +129,11 @@ void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegist
 
                         sucess = (graph_final != nullptr);
 
-                    } else {
+                    } else if (algorithm == "free") {
+                        spilled = GraphColoring::freeRegisterAssign(graph,numRegisters);
+                    }
+
+                    else {
                         std::cerr << "Algoritmo desconhecido: " << algorithm << std::endl;
                     }
 

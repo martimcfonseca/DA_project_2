@@ -22,6 +22,8 @@ public:
     std::set<int> lines;                // todas as linhas onde está vivo
     std::vector<LiveRange*> liveRanges;  // live ranges que formam este web
 
+    Web() : id(-1) {}
+
     Web(int webId) : id(webId) {}
 
     /**
