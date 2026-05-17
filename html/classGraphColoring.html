@@ -84,14 +84,14 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a0a4ba0a2651c7ec96637bef9de4bd646" id="r_a0a4ba0a2651c7ec96637bef9de4bd646"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> std::vector&lt; <a class="el" href="classVertex.html">Vertex</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphColoring.html#a0a4ba0a2651c7ec96637bef9de4bd646">colorGraphSpilling</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&amp;<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">int</a> num)</td></tr>
-<tr class="memdesc:a0a4ba0a2651c7ec96637bef9de4bd646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colors a graph using spilling strategy.  <br /></td></tr>
+<tr class="memdesc:a0a4ba0a2651c7ec96637bef9de4bd646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs graph coloring using a spilling-based strategy.  <br /></td></tr>
 <tr class="separator:a0a4ba0a2651c7ec96637bef9de4bd646"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7c09a7fa351a0c0e9fdf5d160c478ca" id="r_ab7c09a7fa351a0c0e9fdf5d160c478ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classEdge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphColoring.html#ab7c09a7fa351a0c0e9fdf5d160c478ca">colorGraphNormal</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&amp;<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">int</a> num)</td></tr>
-<tr class="memdesc:ab7c09a7fa351a0c0e9fdf5d160c478ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colors a graph using a standard greedy coloring algorithm.  <br /></td></tr>
+<tr class="memdesc:ab7c09a7fa351a0c0e9fdf5d160c478ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard greedy graph coloring algorithm.  <br /></td></tr>
 <tr class="separator:ab7c09a7fa351a0c0e9fdf5d160c478ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa40676baef99031108cb67ae844a54ae" id="r_aa40676baef99031108cb67ae844a54ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphColoring.html#aa40676baef99031108cb67ae844a54ae">colorGraphSplitting</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&amp;<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">int</a> num, <a class="el" href="classEdge.html">int</a> <a class="el" href="classEdge.html">max_splits</a>, std::vector&lt; <a class="el" href="structSplitInfo.html">SplitInfo</a> &gt; &amp;<a class="el" href="classEdge.html">splits_info</a>, std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">all_webs</a>)</td></tr>
-<tr class="memdesc:aa40676baef99031108cb67ae844a54ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colors a graph using splitting strategy.  <br /></td></tr>
-<tr class="separator:aa40676baef99031108cb67ae844a54ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9075faaee05753983036aa964ea3d774" id="r_a9075faaee05753983036aa964ea3d774"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphColoring.html#a9075faaee05753983036aa964ea3d774">colorGraphSplitting</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&amp;<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">int</a> num, <a class="el" href="classEdge.html">int</a> <a class="el" href="classEdge.html">max_splits</a>, std::vector&lt; <a class="el" href="classVertex.html">Vertex</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; * &gt; &amp;<a class="el" href="classEdge.html">spilled</a>, std::vector&lt; <a class="el" href="structSplitInfo.html">SplitInfo</a> &gt; &amp;<a class="el" href="classEdge.html">splits_info</a>, std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">all_webs</a>)</td></tr>
+<tr class="memdesc:a9075faaee05753983036aa964ea3d774"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classGraph.html">Graph</a> coloring with splitting strategy.  <br /></td></tr>
+<tr class="separator:a9075faaee05753983036aa964ea3d774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab03dfe0e28922d8f0d849188845485b8" id="r_ab03dfe0e28922d8f0d849188845485b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> std::vector&lt; <a class="el" href="classVertex.html">Vertex</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphColoring.html#ab03dfe0e28922d8f0d849188845485b8">freeRegisterAssign</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">int</a> num)</td></tr>
 <tr class="memdesc:ab03dfe0e28922d8f0d849188845485b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs register allocation using a free-register assignment strategy.  <br /></td></tr>
 <tr class="separator:ab03dfe0e28922d8f0d849188845485b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,7 +101,8 @@ Static Public Member Functions</h2></td></tr>
 <p>Implements different strategies:</p><ul>
 <li>normal coloring</li>
 <li>spilling</li>
-<li>splitting-based coloring </li>
+<li>splitting-based coloring</li>
+<li>free register </li>
 </ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab7c09a7fa351a0c0e9fdf5d160c478ca" name="ab7c09a7fa351a0c0e9fdf5d160c478ca"></a>
@@ -138,19 +139,13 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Colors a graph using a standard greedy coloring algorithm. </p>
-<p>Standard greedy graph coloring algorithm.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph</td><td>Interference graph. </td></tr>
-    <tr><td class="paramname">num</td><td>Number of available registers. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if coloring succeeded without conflicts.</dd></dl>
+<p>Standard greedy graph coloring algorithm. </p>
 <p>If a valid coloring within K colors is not possible, the function returns false.</p>
 <p>Time Complexity:</p><ul>
 <li>O(v² + e)</li>
+<li>Where:</li>
+<li>v = number of vertices</li>
+<li>e = number of edges</li>
 </ul>
 <p>Space Complexity:</p><ul>
 <li>O(v) </li>
@@ -192,16 +187,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Colors a graph using spilling strategy. </p>
-<p>Performs graph coloring using a spilling-based strategy.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph</td><td>Interference graph. </td></tr>
-    <tr><td class="paramname">num</td><td>Number of available registers. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>List of spilled vertices.</dd></dl>
+<p>Performs graph coloring using a spilling-based strategy. </p>
 <p>This algorithm removes low-degree nodes first and assigns colors in reverse order. When no node with degree &lt; K exists, a spill (node removal to memory) is performed.</p>
 <p>Time Complexity:</p><ul>
 <li>O(v² + e)</li>
@@ -224,8 +210,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa40676baef99031108cb67ae844a54ae" name="aa40676baef99031108cb67ae844a54ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa40676baef99031108cb67ae844a54ae">&#9670;&#160;</a></span>colorGraphSplitting()</h2>
+<a id="a9075faaee05753983036aa964ea3d774" name="a9075faaee05753983036aa964ea3d774"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9075faaee05753983036aa964ea3d774">&#9670;&#160;</a></span>colorGraphSplitting()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -254,6 +240,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classVertex.html">Vertex</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>spilled</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::vector&lt; <a class="el" href="structSplitInfo.html">SplitInfo</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>splits_info</em>, </td>
         </tr>
@@ -276,22 +268,14 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Colors a graph using splitting strategy. </p>
-<p><a class="el" href="classGraph.html">Graph</a> coloring with splitting strategy.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph</td><td>Interference graph. </td></tr>
-    <tr><td class="paramname">num</td><td>Number of registers. </td></tr>
-    <tr><td class="paramname">max_splits</td><td>Maximum number of allowed splits. </td></tr>
-    <tr><td class="paramname">splits_info</td><td>Stores metadata about performed splits. </td></tr>
-    <tr><td class="paramname">webs_todo</td><td>List of all webs involved in processing. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>New graph after splitting operations.</dd></dl>
+<p><a class="el" href="classGraph.html">Graph</a> coloring with splitting strategy. </p>
 <p>Tries progressively splitting high-degree webs until coloring becomes possible.</p>
 <p>Time Complexity:</p><ul>
-<li>Exponential in worst case due to splitting attempts </li>
+<li>O(k*v³)</li>
+</ul>
+<p>Where:</p><ul>
+<li>v = graph vertices</li>
+<li>k = number of split iterations </li>
 </ul>
 
 </div>

@@ -40,27 +40,13 @@ public:
 
     LiveRange(const std::string& var): variable(var), start(-1), end(-1),has_def(false), has_use(false) {}
 
-    /**
-    * @brief Adds a line to the live range.
-    * @param linha Line number to add.
-    * @param marcador Marker character:
-    * - '+' for definition
-    * - '-' for use
-    */
+
     void addLine(int line, char marker);
 
-    /**
-     * @brief Checks whether the live range contains a given line.
-     * @param linha Line number to search for.
-     * @return true if the line exists in the live range.
-     */
+
     bool contains(int line) const;
 
-    /**
-     * @brief Checks whether this live range overlaps another.
-     * @param other Live range to compare against.
-     * @return true if the ranges overlap.
-     */
+
     bool overlaps(const LiveRange& other) const;
     void print() const;
 };

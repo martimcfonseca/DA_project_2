@@ -125,6 +125,10 @@ std::vector<Vertex<Web> *> GraphColoring::colorGraphSpilling(Graph<Web> *&graph,
  * Time Complexity:
  * - O(v² + e)
  *
+*  * Where:
+ * - v = number of vertices
+ * - e = number of edges
+ *
  * Space Complexity:
  * - O(v)
  */
@@ -299,7 +303,7 @@ std::vector<Web*> GraphColoring::divideWeb(Web* original, int& next_id) {
  * @brief Rebuilds interference graph after splitting.
  *
  * Time Complexity:
- * - O(v² + e)
+ * - O(v³)
  */
 Graph<Web>* GraphColoring::rebuildGraph(
     Graph<Web>* original_graph,
@@ -386,7 +390,12 @@ Graph<Web>* GraphColoring::rebuildGraph(
  * coloring becomes possible.
  *
  * Time Complexity:
- * - Exponential in worst case due to splitting attempts
+ * - O(k*v³)
+ *
+ * Where:
+ * - v = graph vertices
+ * - k = number of split iterations
+ *
  */
 Graph<Web>* GraphColoring::colorGraphSplitting(
     Graph<Web>*& graph,

@@ -79,12 +79,12 @@ $(function() {
 <p>Responsible for generating final reports and summaries.  
  <a href="classOutput.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="output_8h_source.html">output.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="Output_8h_source.html">Output.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ab0a5d314b2cf73784feaef5d2dce1620" id="r_ab0a5d314b2cf73784feaef5d2dce1620"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ab0a5d314b2cf73784feaef5d2dce1620">generateOutput</a> (<a class="el" href="classEdge.html">const</a> std::string &amp;<a class="el" href="classEdge.html">filename</a>, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">webs_all</a>, <a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *<a class="el" href="classEdge.html">graph_final</a>, <a class="el" href="classEdge.html">int</a> <a class="el" href="classEdge.html">num_register</a>, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classVertex.html">Vertex</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; * &gt; &amp;<a class="el" href="classEdge.html">spilled</a>={}, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="structSplitInfo.html">SplitInfo</a> &gt; &amp;<a class="el" href="classEdge.html">splits</a>={})</td></tr>
-<tr class="memdesc:ab0a5d314b2cf73784feaef5d2dce1620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a complete output file with allocation results.  <br /></td></tr>
+<tr class="memdesc:ab0a5d314b2cf73784feaef5d2dce1620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a full output file describing register allocation results.  <br /></td></tr>
 <tr class="separator:ab0a5d314b2cf73784feaef5d2dce1620"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3a4b9add15709812458ca9b024012b5" id="r_ab3a4b9add15709812458ca9b024012b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOutput.html#ab3a4b9add15709812458ca9b024012b5">printResume</a> (<a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">webs_all</a>, <a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *<a class="el" href="classEdge.html">graph_final</a>, <a class="el" href="classEdge.html">int</a> <a class="el" href="classEdge.html">num_registers</a>, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classVertex.html">Vertex</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; * &gt; &amp;<a class="el" href="classEdge.html">spilled</a>={}, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="structSplitInfo.html">SplitInfo</a> &gt; &amp;<a class="el" href="classEdge.html">splits</a>={})</td></tr>
 <tr class="separator:ab3a4b9add15709812458ca9b024012b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,19 +151,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Generates a complete output file with allocation results. </p>
-<p>Generates a full output file describing register allocation results.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td><a class="el" href="classOutput.html" title="Responsible for generating final reports and summaries.">Output</a> file name. </td></tr>
-    <tr><td class="paramname">webs_all</td><td>All webs processed in the system. </td></tr>
-    <tr><td class="paramname">graph_final</td><td>Final interference graph. </td></tr>
-    <tr><td class="paramname">num_register</td><td>Number of available registers. </td></tr>
-    <tr><td class="paramname">spilled</td><td>List of spilled vertices. </td></tr>
-    <tr><td class="paramname">splits</td><td>Metadata about split operations.</td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Generates a full output file describing register allocation results. </p>
 <p>The output includes:</p><ul>
 <li><a class="el" href="classWeb.html" title="Represents a web formed by one or more live ranges.">Web</a> splitting information</li>
 <li>Final webs and their live ranges</li>
@@ -251,8 +239,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="output_8h_source.html">output.h</a></li>
-<li>src/<a class="el" href="output_8cpp.html">output.cpp</a></li>
+<li>src/<a class="el" href="Output_8h_source.html">Output.h</a></li>
+<li>src/<a class="el" href="Output_8cpp.html">Output.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

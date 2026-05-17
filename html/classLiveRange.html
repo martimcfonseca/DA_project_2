@@ -171,17 +171,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Adds a line to the live range. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">linha</td><td>Line number to add. </td></tr>
-    <tr><td class="paramname">marcador</td><td>Marker character:<ul>
-<li>'+' for definition</li>
-<li>'-' for use</li>
-</ul>
-</td></tr>
-  </table>
-  </dd>
-</dl>
 <p>The line is inserted into the internal vector and definition/use markers are updated depending on the provided marker character.</p>
 <p>Supported markers:</p><ul>
 <li>'+' -&gt; definition</li>
@@ -220,13 +209,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Checks whether the live range contains a given line. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">linha</td><td>Line number to search for. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the line exists in the live range.</dd></dl>
 <p>Performs a linear search over the stored lines.</p>
 <p>Time Complexity:</p><ul>
 <li>O(n)</li>
@@ -264,13 +246,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Checks whether this live range overlaps another. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">other</td><td>Live range to compare against. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the ranges overlap.</dd></dl>
 <p>Two live ranges overlap if they share at least one line. This method is mainly used later when constructing webs.</p>
 <p>Time Complexity:</p><ul>
 <li>O(n * m)</li>
