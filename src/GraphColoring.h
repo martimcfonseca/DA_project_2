@@ -51,11 +51,12 @@ class GraphColoring {
      * @param graph Interference graph.
      * @param num Number of registers.
      * @param max_splits Maximum number of allowed splits.
+     * @param spilled Stores divided webs to be splitted.
      * @param splits_info Stores metadata about performed splits.
-     * @param webs_todo List of all webs involved in processing.
+     * @param all_webs List of all webs involved in processing.
      * @return New graph after splitting operations.
      */
-    static Graph<Web>* colorGraphSplitting(Graph<Web>*& graph,int num,int max_splits,std::vector<SplitInfo>& splits_info,std::vector<Web*>& all_webs);
+    static Graph<Web>* colorGraphSplitting(Graph<Web>*& graph,int num,int max_splits, std::vector<Vertex<Web>*>& spilled, std::vector<SplitInfo>& splits_info,std::vector<Web*>& all_webs);
 
     static std::vector<Vertex<Web>*> freeRegisterAssign(Graph<Web>* graph, int num);
     private:

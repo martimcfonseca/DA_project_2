@@ -59,13 +59,17 @@ void Output::generateOutput(
 
         for (const auto& split : splits) {
             file << "original: web" << split.original->id
-                 << " (" << split.original->variable << ")\n";
-
-            file << "parts: ";
+                 << " (" << split.original->variable << ") ";
+            for (auto n : split.original->lines) {
+                file << n << ' ';
+            }
+            file << "\nparts:\n";
             for (size_t i = 0; i < split.parts.size(); i++) {
-                file << "web" << split.parts[i]->id;
-                if (i < split.parts.size() - 1)
-                    file << ", ";
+                file << "web" << split.parts[i]->id << " (" << split.original->variable << ") ";
+                for (auto n : split.parts[i]->lines) {
+                    file << n << ' ';
+                }
+                file << '\n';
             }
 
             file << "\n";
