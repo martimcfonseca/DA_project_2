@@ -92,10 +92,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a681ac06ea1625abf6594c84d1c82b462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a live range to the web.  <br /></td></tr>
 <tr class="separator:a681ac06ea1625abf6594c84d1c82b462"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7866c4406245a901b72a997bcb723cb" id="r_ac7866c4406245a901b72a997bcb723cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWeb.html#ac7866c4406245a901b72a997bcb723cb">interfereWith</a> (<a class="el" href="classEdge.html">const</a> <a class="el" href="classWeb.html">Web</a> &amp;<a class="el" href="classEdge.html">other</a>) <a class="el" href="classEdge.html">const</a></td></tr>
-<tr class="memdesc:ac7866c4406245a901b72a997bcb723cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether this web interferes with another web.  <br /></td></tr>
+<tr class="memdesc:ac7866c4406245a901b72a997bcb723cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines whether this web interferes with another web.  <br /></td></tr>
 <tr class="separator:ac7866c4406245a901b72a997bcb723cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaebbf5457b911cca41cd03dc8cd3c518" id="r_aaebbf5457b911cca41cd03dc8cd3c518"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWeb.html#aaebbf5457b911cca41cd03dc8cd3c518">contains</a> (<a class="el" href="classEdge.html">int</a> line) <a class="el" href="classEdge.html">const</a></td></tr>
-<tr class="memdesc:aaebbf5457b911cca41cd03dc8cd3c518"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the web contains a specific line.  <br /></td></tr>
+<tr class="memdesc:aaebbf5457b911cca41cd03dc8cd3c518"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a given line belongs to the web.  <br /></td></tr>
 <tr class="separator:aaebbf5457b911cca41cd03dc8cd3c518"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01c6b2c8aad72ca835ae53145346f07a" id="r_a01c6b2c8aad72ca835ae53145346f07a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWeb.html#a01c6b2c8aad72ca835ae53145346f07a">print</a> () <a class="el" href="classEdge.html">const</a></td></tr>
 <tr class="separator:a01c6b2c8aad72ca835ae53145346f07a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -188,12 +188,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Adds a live range to the web. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">lr</td><td>Pointer to the live range to add.</td></tr>
-  </table>
-  </dd>
-</dl>
 <p>The live range pointer is stored internally and all its live lines are inserted into the web line set.</p>
 <p>If the web variable name has not yet been defined, it is initialized using the variable associated with the first inserted live range.</p>
 <p>Time Complexity:</p><ul>
@@ -231,15 +225,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Checks whether the web contains a specific line. </p>
-<p>Checks whether a given line belongs to the web.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">linha</td><td>Line number to search for. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the line exists in the web.</dd></dl>
+<p>Checks whether a given line belongs to the web. </p>
 <p>Uses set lookup for efficient searching.</p>
 <p>Time Complexity:</p><ul>
 <li>O(log n)</li>
@@ -293,15 +279,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Checks whether this web interferes with another web. </p>
-<p>Determines whether this web interferes with another web.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">other</td><td><a class="el" href="classWeb.html" title="Represents a web formed by one or more live ranges.">Web</a> to compare against. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the webs interfere, false otherwise.</dd></dl>
+<p>Determines whether this web interferes with another web. </p>
 <p>Two webs interfere if they share at least one active line, except for the special case where one web ends exactly when the other begins.</p>
 <p>The method computes the intersection between both line sets and analyzes overlapping live ranges.</p>
 <p>Time Complexity:</p><ul>

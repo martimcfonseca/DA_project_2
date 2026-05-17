@@ -56,6 +56,7 @@
  *     - greedy coloring
  *     - spilling
  *     - splitting
+ *     - free register
  *
  * - \ref Output "Output.h/cpp"
  *   - Generates final report and formatted output file
@@ -75,7 +76,7 @@
  * - Graph construction: O(w²)
  * - Greedy coloring: O(v + e)
  * - Spilling strategy: O(v² + e)
- * - Splitting strategy: potentially O(v² * k)
+ * - Splitting strategy: potentially O(v³ * k)
  *
  * Where:
  * - n = number of input live ranges

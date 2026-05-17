@@ -26,24 +26,13 @@ public:
 
     Web(int webId) : id(webId) {}
 
-    /**
-         * @brief Adds a live range to the web.
-         * @param lr Pointer to the live range to add.
-         */
+
     void addLiveRange(LiveRange* lr);
 
-    /**
-         * @brief Checks whether this web interferes with another web.
-         * @param other Web to compare against.
-         * @return true if the webs interfere, false otherwise.
-         */
+
     bool interfereWith(const Web& other) const;
 
-    /**
-         * @brief Checks whether the web contains a specific line.
-         * @param linha Line number to search for.
-         * @return true if the line exists in the web.
-         */
+
     bool contains(int line) const;
 
 

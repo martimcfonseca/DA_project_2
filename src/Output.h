@@ -17,15 +17,7 @@
 class Output {
 public:
 
-    /**
-     * @brief Generates a complete output file with allocation results.
-     * @param filename Output file name.
-     * @param webs_all All webs processed in the system.
-     * @param graph_final Final interference graph.
-     * @param num_register Number of available registers.
-     * @param spilled List of spilled vertices.
-     * @param splits Metadata about split operations.
-     */
+
     static void generateOutput(
         const std::string& filename,
         const std::vector<Web*>& webs_all,

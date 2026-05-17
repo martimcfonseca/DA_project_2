@@ -84,10 +84,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac588e4f9bedb3e767753e6084f844e68" id="r_ac588e4f9bedb3e767753e6084f844e68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> std::map&lt; std::string, std::vector&lt; <a class="el" href="classLiveRange.html">LiveRange</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#ac588e4f9bedb3e767753e6084f844e68">parseRanges</a> (<a class="el" href="classEdge.html">const</a> std::string &amp;<a class="el" href="classEdge.html">filename</a>)</td></tr>
-<tr class="memdesc:ac588e4f9bedb3e767753e6084f844e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a file containing live ranges.  <br /></td></tr>
+<tr class="memdesc:ac588e4f9bedb3e767753e6084f844e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a file containing variable live ranges.  <br /></td></tr>
 <tr class="separator:ac588e4f9bedb3e767753e6084f844e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ed804d1b3e2f1dc88a1714b69756ed3" id="r_a8ed804d1b3e2f1dc88a1714b69756ed3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#a8ed804d1b3e2f1dc88a1714b69756ed3">parseConfig</a> (<a class="el" href="classEdge.html">const</a> std::string &amp;<a class="el" href="classEdge.html">filename</a>, <a class="el" href="classEdge.html">int</a> &amp;<a class="el" href="classEdge.html">numRegistos</a>, std::string &amp;<a class="el" href="classEdge.html">algoritmo</a>, <a class="el" href="classEdge.html">int</a> &amp;<a class="el" href="classEdge.html">parametro</a>)</td></tr>
-<tr class="memdesc:a8ed804d1b3e2f1dc88a1714b69756ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the main configuration file.  <br /></td></tr>
+<tr class="memdesc:a8ed804d1b3e2f1dc88a1714b69756ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the main configuration file. The method extracts:  <br /></td></tr>
 <tr class="separator:a8ed804d1b3e2f1dc88a1714b69756ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -140,17 +140,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Parses the main configuration file. </p>
-<p>Parses the main configuration file. The method extracts:</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>Name of the configuration file. </td></tr>
-    <tr><td class="paramname">numRegistos</td><td>Number of available registers. </td></tr>
-    <tr><td class="paramname">algoritmo</td><td>Name of the selected algorithm. </td></tr>
-    <tr><td class="paramname">parametro</td><td>Additional parameter associated with the algorithm.</td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Parses the main configuration file. The method extracts: </p>
 <ul>
 <li>Number of registers</li>
 <li>Algorithm name</li>
@@ -201,15 +191,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Parses a file containing live ranges. </p>
-<p>Parses a file containing variable live ranges.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>Name of the file to parse. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Map containing the parsed live ranges organized by identifier.</dd></dl>
+<p>Parses a file containing variable live ranges. </p>
 <p>The expected format for each line is: variable: 1+,2,3,4-</p>
 <p>Empty lines and comments starting with '#' are ignored. Each parsed live range is stored in a map indexed by the variable name.</p>
 <p>Time Complexity:</p><ul>

@@ -1,4 +1,7 @@
-
+/**
+* @file Menu.cpp
+ * @brief Implementation of the menu system.
+ */
 
 #ifndef DA_PROJECT_MENU_H
 #define DA_PROJECT_MENU_H

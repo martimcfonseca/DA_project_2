@@ -11,7 +11,7 @@ var searchData=
   ['color_8',['color',['../classVertex.html#a5a9009852f9e438df67d4ae584d6f308',1,'Vertex']]],
   ['colorgraphnormal_9',['colorGraphNormal',['../classGraphColoring.html#ab7c09a7fa351a0c0e9fdf5d160c478ca',1,'GraphColoring']]],
   ['colorgraphspilling_10',['colorGraphSpilling',['../classGraphColoring.html#a0a4ba0a2651c7ec96637bef9de4bd646',1,'GraphColoring']]],
-  ['colorgraphsplitting_11',['colorGraphSplitting',['../classGraphColoring.html#aa40676baef99031108cb67ae844a54ae',1,'GraphColoring']]],
+  ['colorgraphsplitting_11',['colorGraphSplitting',['../classGraphColoring.html#a9075faaee05753983036aa964ea3d774',1,'GraphColoring']]],
   ['compiler_5fid_12',['compiler_id',['../CMakeCCompilerId_8c.html#a81dee0709ded976b2e0319239f72d174',1,'COMPILER_ID:&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a81dee0709ded976b2e0319239f72d174',1,'COMPILER_ID:&#160;CMakeCXXCompilerId.cpp']]],
   ['complexity_20overview_13',['Complexity Overview',['../index.html#complexity_sec',1,'']]],
   ['contains_14',['contains',['../classWeb.html#aaebbf5457b911cca41cd03dc8cd3c518',1,'Web::contains()'],['../classLiveRange.html#a7cba4ee465fe09cf94f32ef2a3fde4c4',1,'LiveRange::contains()']]],

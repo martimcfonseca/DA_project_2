@@ -386,7 +386,12 @@ Graph<Web>* GraphColoring::rebuildGraph(
  * coloring becomes possible.
  *
  * Time Complexity:
- * - Exponential in worst case due to splitting attempts
+ * - O(k*v³)
+ *
+ * Where:
+ * - v = graph vertices
+ * - k = number of split iterations
+ *
  */
 Graph<Web>* GraphColoring::colorGraphSplitting(
     Graph<Web>*& graph,

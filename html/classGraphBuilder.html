@@ -81,10 +81,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ab8709d712f5c810929c5fa20c6493c29" id="r_ab8709d712f5c810929c5fa20c6493c29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphBuilder.html#ab8709d712f5c810929c5fa20c6493c29">createWebs</a> (std::map&lt; std::string, std::vector&lt; <a class="el" href="classLiveRange.html">LiveRange</a> &gt; &gt; &amp;<a class="el" href="classEdge.html">ranges</a>)</td></tr>
-<tr class="memdesc:ab8709d712f5c810929c5fa20c6493c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates webs from live ranges.  <br /></td></tr>
+<tr class="memdesc:ab8709d712f5c810929c5fa20c6493c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates webs from a set of live ranges grouped by variable.  <br /></td></tr>
 <tr class="separator:ab8709d712f5c810929c5fa20c6493c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac956c96bd85a39a3c73b01e25fda2c01" id="r_ac956c96bd85a39a3c73b01e25fda2c01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphBuilder.html#ac956c96bd85a39a3c73b01e25fda2c01">buildGraph</a> (std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">webs</a>)</td></tr>
-<tr class="memdesc:ac956c96bd85a39a3c73b01e25fda2c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds the interference graph from a set of webs.  <br /></td></tr>
+<tr class="memdesc:ac956c96bd85a39a3c73b01e25fda2c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds an interference graph from a set of webs.  <br /></td></tr>
 <tr class="separator:ac956c96bd85a39a3c73b01e25fda2c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae31b3d0fadaac3b80098cbf20e5d880" id="r_aae31b3d0fadaac3b80098cbf20e5d880"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEdge.html">static</a> <a class="el" href="classEdge.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphBuilder.html#aae31b3d0fadaac3b80098cbf20e5d880">printGraph</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classWeb.html">Web</a> &gt; *<a class="el" href="classEdge.html">graph</a>, <a class="el" href="classEdge.html">const</a> std::vector&lt; <a class="el" href="classWeb.html">Web</a> * &gt; &amp;<a class="el" href="classEdge.html">webs</a>)</td></tr>
 <tr class="separator:aae31b3d0fadaac3b80098cbf20e5d880"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,15 +116,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Builds the interference graph from a set of webs. </p>
-<p>Builds an interference graph from a set of webs.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">webs</td><td>Vector containing all generated webs. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the generated interference graph.</dd></dl>
+<p>Builds an interference graph from a set of webs. </p>
 <p>Each web becomes a vertex. An edge is added between two webs if they interfere.</p>
 <p>Time Complexity:</p><ul>
 <li>O(w² * i)</li>
@@ -173,15 +165,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Creates webs from live ranges. </p>
-<p>Creates webs from a set of live ranges grouped by variable.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ranges</td><td>Map containing live ranges grouped by variable. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Vector containing pointers to the generated webs.</dd></dl>
+<p>Creates webs from a set of live ranges grouped by variable. </p>
 <p>Live ranges belonging to the same variable are merged into webs when they overlap. A greedy merging strategy is used.</p>
 <p>Time Complexity:</p><ul>
 <li>O(v * n² * m)</li>

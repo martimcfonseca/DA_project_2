@@ -23,19 +23,10 @@
 class GraphBuilder {
 public:
 
-    /**
-     * @brief Creates webs from live ranges.
-     * @param ranges Map containing live ranges grouped by variable.
-     * @return Vector containing pointers to the generated webs.
-     */
+
     static std::vector<Web*> createWebs(
         std::map<std::string, std::vector<LiveRange>>& ranges);
 
-    /**
-         * @brief Builds the interference graph from a set of webs.
-         * @param webs Vector containing all generated webs.
-         * @return Pointer to the generated interference graph.
-         */
     static Graph<Web>* buildGraph(std::vector<Web*>& webs);
 
 
@@ -45,12 +36,7 @@ public:
     static void printMatrix(Graph<Web>* graph, const std::vector<Web*>& webs);
 
 private:
-    /**
-     * @brief Checks whether two live ranges overlap.
-     * @param lr1 First live range.
-     * @param lr2 Second live range.
-     * @return true if the live ranges overlap.
-     */
+
     static bool overlaps(const LiveRange& lr1, const LiveRange& lr2);
 };
 
