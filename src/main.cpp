@@ -152,6 +152,7 @@ int main(int argc, char* argv[]) {
                 webs,
                 grafo_final,
                 numRegistos,
+                parametro,
                 spillados,
                 splits);
 

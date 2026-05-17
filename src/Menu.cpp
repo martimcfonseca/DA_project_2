@@ -142,6 +142,7 @@ void runMenu( std::map<std::string, std::vector<LiveRange>> ranges,int numRegist
                         webs,
                         graph_final,
                         numRegisters,
+                        parameters,
                         spilled,
                         splits);
 

@@ -23,6 +23,7 @@ public:
         const std::vector<Web*>& webs_all,
         Graph<Web>* graph_final,
         int num_register,
+        int parameters,
         const std::vector<Vertex<Web>*>& spilled = {},
         const std::vector<SplitInfo>& splits = {}
     );

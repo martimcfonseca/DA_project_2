@@ -39,6 +39,7 @@ void Output::generateOutput(
     const std::vector<Web*>& webs_all,
     Graph<Web>* graph_final,
     int num_register,
+    int parameters,
     const std::vector<Vertex<Web>*>& spilled,
     const std::vector<SplitInfo>& splits) {
 
@@ -48,6 +49,8 @@ void Output::generateOutput(
         std::cerr << "Erro ao criar ficheiro: " << filename << std::endl;
         return;
     }
+
+
 
     // =====================================================
     // SPLITTING INFO
@@ -128,10 +131,19 @@ void Output::generateOutput(
             web_colors[color].push_back(web_id);
         }
     }
+    if (!spilled.empty()) {
+        if (spilled.size() > parameters) {
+            file << "registers: 0" << "\n\n";
+        }
+        else {
+            file << "registers: " << used_colors.size() << "\n\n";
+        }
+    }
+    else {
+        file << "registers: " << used_colors.size() << "\n\n";
+    }
 
-    file << "registers: " << used_colors.size() << "\n\n";
-
-    if (used_colors.size()==0) {
+    if (used_colors.size()==0 || (spilled.size()> parameters)) {
 
         for (auto v : vertexes) {
 
@@ -154,12 +166,14 @@ void Output::generateOutput(
     }
 
     // Registos
-    for (const auto& pair : web_colors) {
+    if (!(spilled.size()>parameters)) {
+        for (const auto& pair : web_colors) {
 
-        int cor = pair.first;
+            int cor = pair.first;
 
-        for (int web_id : pair.second) {
-            file << "r" << cor << ": web" << web_id << "\n";
+            for (int web_id : pair.second) {
+                file << "r" << cor << ": web" << web_id << "\n";
+            }
         }
     }
 
@@ -167,7 +181,7 @@ void Output::generateOutput(
     // SPILLING
     // =====================================================
 
-    if (!spilled.empty()) {
+    if ((!spilled.empty()) && (spilled.size() <= parameters) ) {
 
         file << "\n";
         file << "# SPILLED WEBS\n";
