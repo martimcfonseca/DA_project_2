@@ -317,7 +317,6 @@ Graph<Web>* GraphColoring::rebuildGraph(
 
     // Adicionar todos os vértices (webs originais não divididos + partes)
     for (Web* web : all_webs) {
-        // Verificar se este web foi dividido
         bool was_divided = false;
         for (const auto& split : splits) {
             if (split.original->id == web->id) {
@@ -327,7 +326,6 @@ Graph<Web>* GraphColoring::rebuildGraph(
         }
 
         if (!was_divided) {
-            // Web não foi dividido, adicionar normalmente
             new_graph->addVertex(*web);
         }
     }
@@ -484,6 +482,7 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
 
             // adicionar partes ao vetor temporário
             current_webs.push_back(partes[0]);
+            current_webs.push_back(partes[1]);
             current_webs.push_back(partes[2]);
 
             Web temp = *partes[1];
@@ -523,6 +522,10 @@ Graph<Web>* GraphColoring::colorGraphSplitting(
 
         bool sucesso =
             colorGraphNormal(novo_grafo, num);
+
+        for (auto w : spilled) {
+            novo_grafo->findVertex(w->getInfo())->setColor(-1);
+        }
 
         if (sucesso) {
 
